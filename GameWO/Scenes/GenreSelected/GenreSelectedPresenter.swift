@@ -21,7 +21,7 @@ class GenreSelectedPresenter:GenreSelectedPresenterProtocols{
         if showloader == true {
         self.view?.showLoading()
         }
-        NetworkCaller.Request(GamesRouter.gamesGenreList(genreId: Genre, page: Page, page_size: pageSize, ordering: ordering)) { (result:Result<GameListResposne,Error>) in
+        Network.Request(URL:GamesRouter.gamesGenreList(genreId: Genre, page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
                  print(response)
@@ -37,11 +37,13 @@ class GenreSelectedPresenter:GenreSelectedPresenterProtocols{
                  }
                  self.view?.reloadGenreCollection()
                 completionHandler()
-             case .failure(let error):
-                self.view?.showAlert(title: "", message: error.localizedDescription)
-                 print(error)
+             case .failure(let FailReponse):
+                self.view?.showAlert(title: "", message: FailReponse.error ?? "")
+                 print(FailReponse)
                 completionHandler()
-             }
+            case .failureError(let error):
+                print(error)
+            }
         }
     }
     

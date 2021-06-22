@@ -8,16 +8,15 @@
 import Foundation
 
 protocol APIConfiguration {
-    var baseURL: String { get }
     var path: String { get }
     var parameters: RequestParams { get }
     var method: HTTPMethod { get }
-    var Header:[String:String] { get }
+    var Headers:[String:Any]? { get }
 }
 // MARK: - cofigure urlRequest with url and all components body ,header ,method etc...
 extension APIConfiguration {
 public var urlRequest: URLRequest {
-    guard let url = URL(string: baseURL) else {
+    guard let url = URL(string: Endpoints.BaseUrlRawgGames) else {
     fatalError("URL could not be built")
     }
     var request = URLRequest(url: url.appendingPathComponent(path))
