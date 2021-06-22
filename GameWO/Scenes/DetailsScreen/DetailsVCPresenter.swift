@@ -24,7 +24,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
     }
     func ViewDidLoadDetails(id:String) {
             self.view?.showLoading()
-        NetworkCaller.Request(GamesRouter.gamesDetails(id: id)) { (result:Result<GameDetailsResponse, Error>) in
+        Network.Request(URL:GamesRouter.gamesDetails(id: id).urlRequest) { (result:CustomResults<GameDetailsResponse,GameErrorResponse, Error>) in
                 switch result {
                 case .success(let response):
                 print(response)
@@ -38,10 +38,12 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                     self.view?.reloadPlatforms()
                     self.view?.reloadStores()
                 }
-                case .failure(let error):
+                case .failure(let FailResponse):
                 self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: error.localizedDescription)
-                print(error)
+                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                print(FailResponse)
+                case .failureError(let error):
+                    print(error)
                 }
                 
             }
@@ -49,17 +51,19 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
     
     func ViewDidLoadScreenshots(id:String) {
         self.view?.showLoading()
-        NetworkCaller.Request(GamesRouter.Screenshots(id: id)) { (result:Result<ScreenShots, Error>) in
+        Network.Request(URL:GamesRouter.Screenshots(id: id).urlRequest) { (result:CustomResults<ScreenShots,GameErrorResponse, Error>) in
                 switch result {
                 case .success(let response):
                 print(response)
                 self.Screens = response.results ?? []
                 self.view?.hideLoading()
                 self.view?.reloadScreenshots()
-                case .failure(let error):
+                case .failure(let FailResponse):
                 self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: error.localizedDescription)
-                print(error)
+                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                print(FailResponse)
+                case .failureError(let error):
+                    print(error)
                 }
                 
             }
@@ -67,7 +71,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
     }
     func ViewDidLoadTrailer(id: String) {
              self.view?.showLoading()
-           NetworkCaller.Request(GamesRouter.Trailer(id: id)) { (result:Result<TrailerResponse, Error>) in
+        Network.Request(URL:GamesRouter.Trailer(id: id).urlRequest) { (result:CustomResults<TrailerResponse,GameErrorResponse ,Error>) in
                    switch result {
                    case .success(let response):
                    print(response)
@@ -79,10 +83,12 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                    self.view?.hideLoading()
                    self.view?.reloadTrailerVideos()
                     }
-                   case .failure(let error):
+                   case .failure(let FailResponse):
                    self.view?.hideLoading()
-                   self.view?.showAlert(title: "", message: error.localizedDescription)
-                   print(error)
+                   self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                   print(FailResponse)
+                   case .failureError(let error):
+                    print(error)
                    }
                    
                }

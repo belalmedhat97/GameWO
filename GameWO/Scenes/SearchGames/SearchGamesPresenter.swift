@@ -15,7 +15,7 @@ class SearchGamesPresenter:SearchGamesPresenterProtocols{
     }
     func handleDidSearch(searchValue:String) {
         self.view?.showLoading()
-        NetworkCaller.Request(GamesRouter.searchGames(Value: searchValue)) { (Result:Result<GameListResposne, Error>) in
+        Network.Request(URL:GamesRouter.searchGames(Value: searchValue).urlRequest) { (Result:CustomResults<GameListResposne,GameErrorResponse ,Error>) in
             switch Result {
             case .success(let response):
             print(response)
@@ -29,10 +29,13 @@ class SearchGamesPresenter:SearchGamesPresenterProtocols{
 
             self.view?.hideLoading()
             self.view?.reloadGamesCollection()
-            case .failure(let error):
+            case .failure(let FailResponse):
             self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: error.localizedDescription)
-            print(error)
+            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+            print(FailResponse)
+                
+            case .failureError(let error):
+                print(error)
             }
             
         }

@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import Alamofire
 enum GamesRouter:APIConfiguration{
+    
+        
     case gamesListComing(dates:String,page:String,page_size:String)
     case storesGames(storeId: String, page: String, page_size: String, ordering: String)
     case gamesListOrdering(page:String,page_size:String,ordering:String)
@@ -62,51 +63,13 @@ enum GamesRouter:APIConfiguration{
         }
     }
     
-    var headers: [String : String]? {
+    var Headers: [String : Any]? {
         switch self {
         case .gamesListComing(_,_,_),.gamesListOrdering(_,_,_),.gamesGenres,.Screenshots,.Trailer(_),.gamesDetails(_),.searchGames(_),.gamesGenreList(_,_,_,_),.storesGames(_,_,_,_):
             return .none
         }
     }
     
-    var encoding: ParameterEncoding {
-        return JSONEncoding.default
-    }
-    
-    func asURLRequest() throws -> URLRequest {
-          let url = try Endpoints.BaseUrlRawgGames.asURL()
-             
-              var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-          
-              // HTTP Method
-              urlRequest.httpMethod = method.rawValue
+   
 
-
-              // Common Headers
-              urlRequest.allHTTPHeaderFields = headers
-
-              // Parameters
-              switch parameters {
-                  
-              case .body(let params):
-
-                  urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: [])
-                  print(urlRequest.httpBody)
-              case .url(let params):
-                      let queryParams = params.map { pair  in
-                          return URLQueryItem(name: pair.key, value: "\(pair.value)")
-                      }
-                      var components = URLComponents(string:url.appendingPathComponent(path).absoluteString)
-                      components?.queryItems = queryParams
-                      urlRequest.url = components?.url
-               
-              case .NoParamter:
-                  urlRequest.httpBody = nil
-              
-              }
-              
-                  return urlRequest
-    }
-    
-    
 }
