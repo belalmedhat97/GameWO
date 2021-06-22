@@ -21,18 +21,20 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
     }
     func handleViewDidLoadComing() {
         self.view?.showLoading()
-        NetworkCaller.Request(GamesRouter.gamesListComing(dates: getDatePeriod(), page: "1", page_size: "100")) { (result:Result<GameListResposne,Error>) in
+        Network.Request(URL:GamesRouter.gamesListComing(dates: getDatePeriod(), page: "1", page_size: "100").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
                  print(response)
                  self.comeList = response.results ?? []
                  self.view?.hideLoading()
                  self.view?.reloadComingCollection()
-             case .failure(let error):
+             case .failure(let FailResponse):
                 self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: error.localizedDescription)
-                 print(error)
-             }
+                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                 print(FailResponse)
+            case .failureError(let error):
+                print(error)
+            }
         }
     }
     func getDatePeriod() -> String{
@@ -56,7 +58,7 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
         if showloader == true {
         self.view?.showLoading()
         }
-        NetworkCaller.Request(GamesRouter.gamesListOrdering(page: Page, page_size: pageSize, ordering: ordering)) { (result:Result<GameListResposne,Error>) in
+        Network.Request(URL:GamesRouter.gamesListOrdering(page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
                  print(response)
@@ -72,11 +74,13 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
                  }
                  self.view?.reloadScrollCollection()
                 completionHandler()
-             case .failure(let error):
-                self.view?.showAlert(title: "", message: error.localizedDescription)
-                 print(error)
+             case .failure(let FailResponse):
+                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                 print(FailResponse)
                 completionHandler()
-             }
+            case .failureError(let error):
+                print(error)
+            }
         }
     }
     func AddFilterData(){
