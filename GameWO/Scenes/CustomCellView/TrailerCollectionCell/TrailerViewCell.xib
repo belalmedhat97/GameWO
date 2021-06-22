@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrailerClassCell" id="FWg-kN-Wai" customClass="TrailerClassCell" customModule="GameWO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="198" height="181"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lFA-3c-N7L">
+                <rect key="frame" x="0.0" y="0.0" width="198" height="181"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-NB-aoc">
+                        <rect key="frame" x="0.0" y="0.0" width="198" height="181"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Pv0-NB-aoc" secondAttribute="trailing" id="5cz-O9-TVU"/>
+                    <constraint firstAttribute="bottom" secondItem="Pv0-NB-aoc" secondAttribute="bottom" id="Hz9-4J-lmg"/>
+                    <constraint firstItem="Pv0-NB-aoc" firstAttribute="leading" secondItem="lFA-3c-N7L" secondAttribute="leading" id="VEb-eM-nnQ"/>
+                    <constraint firstItem="Pv0-NB-aoc" firstAttribute="top" secondItem="lFA-3c-N7L" secondAttribute="top" id="YMR-fD-Ubk"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="198" height="181"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="0.5"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                    <color key="value" red="0.65098039220000004" green="0.73725490199999999" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="VideoArea" destination="Pv0-NB-aoc" id="169-rH-KLy"/>
+            </connections>
+            <point key="canvasLocation" x="-33.333333333333336" y="74.665178571428569"/>
+        </collectionViewCell>
+    </objects>
+</document>

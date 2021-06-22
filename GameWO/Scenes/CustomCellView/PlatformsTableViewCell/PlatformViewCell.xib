@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlatformClassCell" id="pJf-fB-YfF" customClass="PlatformClassCell" customModule="GameWO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ynR-le-oPc">
+                <rect key="frame" x="0.0" y="0.0" width="389" height="42"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfe-TT-iIv">
+                        <rect key="frame" x="20" y="10" width="349" height="22"/>
+                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="qfe-TT-iIv" secondAttribute="trailing" constant="20" id="GYC-MA-VQt"/>
+                    <constraint firstItem="qfe-TT-iIv" firstAttribute="top" secondItem="ynR-le-oPc" secondAttribute="top" constant="10" id="Xkl-1g-aMI"/>
+                    <constraint firstItem="qfe-TT-iIv" firstAttribute="leading" secondItem="ynR-le-oPc" secondAttribute="leading" constant="20" id="Znd-OW-Rjn"/>
+                    <constraint firstAttribute="bottom" secondItem="qfe-TT-iIv" secondAttribute="bottom" constant="10" id="c1M-Ok-QZZ"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="389" height="42"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                    <real key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                    <color key="value" red="0.4823529412" green="0.92941176469999998" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="PlatformName" destination="qfe-TT-iIv" id="JPn-Hs-Kng"/>
+            </connections>
+            <point key="canvasLocation" x="312.31884057971018" y="178.125"/>
+        </collectionViewCell>
+    </objects>
+</document>
