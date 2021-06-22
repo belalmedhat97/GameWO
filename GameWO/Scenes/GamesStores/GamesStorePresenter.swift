@@ -16,17 +16,19 @@ class GameStorePresenter:GamesStorePresenterProtocol{
     }
     func handleViewDidLoad() {
         self.view?.showLoading()
-        NetworkCaller.Request(StoreRouter.storeList) { (result:Result<GamesStoreResponse, Error>) in
+        Network.Request(URL: StoreRouter.storeList.urlRequest) { (result:CustomResults<GamesStoreResponse,GameErrorResponse, Error>) in
             switch result {
             case .success(let response):
             print(response)
             self.Stores = response.results ?? []
             self.view?.hideLoading()
             self.view?.reloadStoreCollection()
-            case .failure(let error):
+            case .failure(let FailResponse):
             self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: error.localizedDescription)
-            print(error)
+            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+            print(FailResponse)
+            case .failureError(let error):
+                print(error)
             }
             
         }

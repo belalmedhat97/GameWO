@@ -15,17 +15,20 @@ class GamesGenresPresenter:GamesGenresPresenterProtocols{
     }
     func handleViewDidLoad() {
         self.view?.showLoading()
-        NetworkCaller.Request(GamesRouter.gamesGenres) { (result:Result<GameGenresResponse, Error>) in
+        Network.Request(URL:GamesRouter.gamesGenres.urlRequest) { (result:CustomResults<GameGenresResponse,GameErrorResponse, Error>) in
             switch result {
             case .success(let response):
             print(response)
             self.Genre = response.results ?? []
             self.view?.hideLoading()
             self.view?.reloadGenreCollection()
-            case .failure(let error):
+                
+            case .failure(let FailResponse):
             self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: error.localizedDescription)
-            print(error)
+            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                print(FailResponse.error ?? "")
+            case .failureError(let error):
+                print(error)
             }
             
         }
