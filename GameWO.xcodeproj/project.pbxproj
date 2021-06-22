@@ -21,6 +21,7 @@
 		572271DE252231BD0073B0BE /* TrailerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 572271DD252231BD0073B0BE /* TrailerViewCell.xib */; };
 		5723855A249AE64300DB64EA /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57238559249AE64300DB64EA /* BaseProtocols.swift */; };
 		572620EF2521250C009C22E6 /* GamesDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572620EE2521250C009C22E6 /* GamesDetailsResponse.swift */; };
+		5736FCB526827A95004E971C /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5736FCB426827A95004E971C /* APIConstant.swift */; };
 		57415A4C2495565D00C37B37 /* APIConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57415A4B2495565D00C37B37 /* APIConfigurations.swift */; };
 		57415A4E24957A9B00C37B37 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57415A4D24957A9B00C37B37 /* Endpoints.swift */; };
 		57415A5224957D4400C37B37 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57415A5124957D4400C37B37 /* UserApi.swift */; };
@@ -97,6 +98,7 @@
 		572271DD252231BD0073B0BE /* TrailerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailerViewCell.xib; sourceTree = "<group>"; };
 		57238559249AE64300DB64EA /* BaseProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
 		572620EE2521250C009C22E6 /* GamesDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesDetailsResponse.swift; sourceTree = "<group>"; };
+		5736FCB426827A95004E971C /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
 		57415A4B2495565D00C37B37 /* APIConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurations.swift; sourceTree = "<group>"; };
 		57415A4D24957A9B00C37B37 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		57415A5124957D4400C37B37 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				57415A4B2495565D00C37B37 /* APIConfigurations.swift */,
 				57415A4D24957A9B00C37B37 /* Endpoints.swift */,
 				57DECBE824BB8FFE00913B91 /* NetworkCaller.swift */,
+				5736FCB426827A95004E971C /* APIConstant.swift */,
 				57415A5024957D1400C37B37 /* Routers */,
 			);
 			path = "Network Layer";
@@ -666,6 +669,7 @@
 				57FB6E3E259121EA00D5D2BE /* GenreSelectedVC.swift in Sources */,
 				578E30DF258A90C3009F1142 /* SearchGamesVC.swift in Sources */,
 				578D82C12502929E002D32F6 /* GamesGenresPresenter.swift in Sources */,
+				5736FCB526827A95004E971C /* APIConstant.swift in Sources */,
 				5775801924BAC250000273A2 /* PopulorClassCell.swift in Sources */,
 				57415A5224957D4400C37B37 /* UserApi.swift in Sources */,
 				57833541249E8C81002D3C9D /* SignInResponse.swift in Sources */,

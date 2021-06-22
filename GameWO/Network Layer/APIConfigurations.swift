@@ -5,29 +5,44 @@
 //  Created by Belal medhat on 6/13/20.
 //  Copyright © 2020 Belal medhat. All rights reserved.
 //
-import Alamofire
 import Foundation
-protocol APIConfiguration:URLRequestConvertible {
-    var method: HTTPMethod { get }
+
+protocol APIConfiguration {
+    var baseURL: String { get }
     var path: String { get }
     var parameters: RequestParams { get }
-    var headers: [String: String]? { get }
-    var encoding: ParameterEncoding { get }
-
+    var method: HTTPMethod { get }
+    var Header:[String:String] { get }
 }
-enum HTTPHeaderField: String {
-    case contentType = "Content-Type"
-    case Parse_application_id = "X-Parse-Application-Id"
-    case Parse_apikey = "X-Parse-REST-API-Key"
-}
+// MARK: - cofigure urlRequest with url and all components body ,header ,method etc...
+extension APIConfiguration {
+public var urlRequest: URLRequest {
+    guard let url = URL(string: baseURL) else {
+    fatalError("URL could not be built")
+    }
+    var request = URLRequest(url: url.appendingPathComponent(path))
+    
+    
+    request.httpMethod = method.rawValue
 
-enum ContentType: String {
-    case json = "Application/json"
-}
+    switch parameters {
 
+            case .body(let params):
+                request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
 
-enum RequestParams {
-    case body(_:Parameters)
-    case url(_:Parameters)
-    case NoParamter
+               case .url(let params):
+                       let queryParams = params.map { pair  in
+                           return URLQueryItem(name: pair.key, value: "\(pair.value)")
+                       }
+                       var components = URLComponents(string:url.appendingPathComponent(path).absoluteString)
+                       components?.queryItems = queryParams
+                       request.url = components?.url
+
+               case .NoParamter:
+                   request.httpBody = nil
+
+               }
+
+                return request
+    }
 }
