@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.4.3)
   - Cosmos (23.0.0)
   - DropDown (2.3.13)
   - IQKeyboardManagerSwift (6.5.6)
@@ -12,7 +11,6 @@ PODS:
   - SwiftyContextMenu (0.1.5)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.2)
   - Cosmos (~> 23.0)
   - DropDown
   - IQKeyboardManagerSwift
@@ -22,7 +20,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - Cosmos
     - DropDown
     - IQKeyboardManagerSwift
@@ -31,7 +28,6 @@ SPEC REPOS:
     - SwiftyContextMenu
 
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
@@ -39,6 +35,6 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyContextMenu: 3cd07fded2bea2e73a98a5b734375dce278d4399
 
-PODFILE CHECKSUM: 0d2c5b16f2a0a391f1f4b30f6199d60faac89dc1
+PODFILE CHECKSUM: c51cb49b6e101ee8f9d5924b9a9482e0252721a3
 
 COCOAPODS: 1.10.1
