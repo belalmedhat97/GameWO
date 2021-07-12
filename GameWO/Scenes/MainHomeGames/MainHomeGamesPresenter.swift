@@ -20,17 +20,24 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
         self.view = view
     }
     func handleViewDidLoadComing() {
+        
         self.view?.showLoading()
         Network.Request(URL:GamesRouter.gamesListComing(dates: getDatePeriod(), page: "1", page_size: "100").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
                  print(response)
                  self.comeList = response.results ?? []
-                 self.view?.hideLoading()
-                 self.view?.reloadComingCollection()
+                DispatchQueue.main.async {
+                    self.view?.hideLoading()
+                    self.view?.reloadComingCollection()
+                }
+                
              case .failure(let FailResponse):
-                self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                DispatchQueue.main.async {
+                    self.view?.hideLoading()
+                    self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                }
+               
                  print(FailResponse)
             case .failureError(let error):
                 print(error)
@@ -64,18 +71,30 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
                  print(response)
                  if response.next != nil { self.view?.NextPage = true } else {self.view?.NextPage = false}
                  if response.previous != nil { self.view?.PreviousPage = true
-                    self.view?.ChangeScrollCollectionBottom()
+                    DispatchQueue.main.async {
+                        self.view?.ChangeScrollCollectionBottom()
+
+                    }
                  } else {self.view?.PreviousPage = false
-                    self.view?.ChangeScrollCollectionBottom()
+                    DispatchQueue.main.async {
+                        self.view?.ChangeScrollCollectionBottom()
+
+                    }
                  }
                  self.scrollList = response.results ?? []
                  if showloader == true {
                     self.view?.hideLoading()
                  }
-                 self.view?.reloadScrollCollection()
+                DispatchQueue.main.async {
+                    self.view?.reloadScrollCollection()
+
+                }
                 completionHandler()
              case .failure(let FailResponse):
-                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                DispatchQueue.main.async {
+                    self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+
+                }
                  print(FailResponse)
                 completionHandler()
             case .failureError(let error):

@@ -38,9 +38,11 @@ class BaseViewController: UIViewController,BaseViewProtocol {
     }
   
     func AnimateLogo(LogoView:UIView){
-         UIView.transition(with: view, duration: 1, options: [.transitionCrossDissolve], animations: {
+        DispatchQueue.main.async {
+            UIView.transition(with: self.view, duration: 1, options: [.transitionCrossDissolve], animations: {
              LogoView.alpha = 1
          }, completion: nil)
+        }
      }
     @objc func checknetwork(){
         NetworkAvailability()
@@ -69,13 +71,19 @@ class BaseViewController: UIViewController,BaseViewProtocol {
         }
     }
     func showLoading() {
-        Loader(removeFromView: false)
-        Indicator.startAnimating()
+        DispatchQueue.main.async {
+            self.Loader(removeFromView: false)
+            self.Indicator.startAnimating()
+
+        }
        }
        
        func hideLoading() {
-        Loader(removeFromView: true)
-        Indicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.Loader(removeFromView: true)
+            self.Indicator.stopAnimating()
+
+        }
        }
     
     func GoVC(Storyboard: String, Screen: String,Present:Bool) {
@@ -125,14 +133,16 @@ class BaseViewController: UIViewController,BaseViewProtocol {
        }
        
     func showAlert(title: String?, message: String) {
+        DispatchQueue.main.async {
+            
            let titleTxt = NSLocalizedString(title ?? "", comment: "")
                 let messageTxt = NSLocalizedString(message, comment: "")
                 let alertController = UIAlertController(title: titleTxt, message: messageTxt, preferredStyle: UIAlertController.Style.alert)
                 let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(alertAction)
-                present(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
        }
-       
+    }
 
     
 

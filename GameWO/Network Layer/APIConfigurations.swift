@@ -30,18 +30,24 @@ public var urlRequest: URLRequest {
                 request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
 
                case .url(let params):
-                       let queryParams = params.map { pair  in
+                let queryParams = params.map { pair  in
                            return URLQueryItem(name: pair.key, value: "\(pair.value)")
                        }
-                       var components = URLComponents(string:url.appendingPathComponent(path).absoluteString)
-                       components?.queryItems = queryParams
-                       request.url = components?.url
+                
+//                queryParams += URLQueryItem(name: "key", value: SecretsManager.shared.getApiKey() ?? "")
+                var components = URLComponents(string:url.appendingPathComponent(path).absoluteString)
+                components?.queryItems = queryParams
+                components?.queryItems?.append(URLQueryItem(name: "key", value: "\(SecretsManager.shared.getApiKey() ?? "")"))
+
+                print(components?.queryItems)
+                request.url = components?.url
+                print(request.url)
 
                case .NoParamter:
                    request.httpBody = nil
 
                }
-
+    print(request)
                 return request
     }
 }

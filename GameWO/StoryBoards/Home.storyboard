@@ -612,7 +612,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="spt-EN-RcK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="BackGroundApp"/>
                         <constraints>
                             <constraint firstItem="xkw-f2-MdG" firstAttribute="leading" secondItem="spt-EN-RcK" secondAttribute="leading" constant="20" id="0Gv-lJ-Rcg"/>
                             <constraint firstItem="NPa-VJ-7g1" firstAttribute="height" secondItem="PPu-Q6-GbU" secondAttribute="height" multiplier="0.25" id="4vn-lI-kKE"/>
@@ -638,7 +638,7 @@
                     <connections>
                         <outlet property="ComingGamesCollection" destination="NPa-VJ-7g1" id="KLT-Ee-V7T"/>
                         <outlet property="Filter" destination="LJj-WD-Txq" id="DbJ-LK-0Je"/>
-                        <outlet property="Logo" destination="hph-23-pcl" id="YOK-AU-VNH"/>
+                        <outlet property="Logo" destination="hph-23-pcl" id="0DM-66-GaG"/>
                         <outlet property="ScrollBottomConstraints" destination="GxM-Rd-UKA" id="XD2-Y2-xp1"/>
                         <outlet property="ScrollGamesCollection" destination="QDU-HW-AgW" id="JtB-Ch-Cl4"/>
                     </connections>

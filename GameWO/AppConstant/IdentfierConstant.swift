@@ -8,15 +8,9 @@
 
 import Foundation
 struct Storyboards {
-    static let Login = "Login"
     static let Home = "Home"
 }
 struct ScreenID {
-    static let SignInVC = "SignInVC"
-    static let SignUpVC = "SignUpVC"
-    static let UserInformationVC = "UserInformationVC"
-    static let PasswordResetVC = "PasswordResetVC"
-    static let VerifyPhoneVC = "VerifyPhoneVC"
     static let MainHomeVC = "MainHomeVC"
     static let MainHomeGamesVC = "MainHomeGamesVC"
     static let GamesGenres = "GamesGenres"

@@ -14,7 +14,6 @@ class StretchAnimator: NSObject {
     var originFrame = CGRect.zero
     var dismissCompletion: (() -> Void)?
 
-    
 }
 extension StretchAnimator: UIViewControllerAnimatedTransitioning{
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

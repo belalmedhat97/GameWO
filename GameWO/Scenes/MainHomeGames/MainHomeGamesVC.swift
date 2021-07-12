@@ -26,6 +26,8 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.showLoading()
+        Logo.alpha = 0
+
         let spinner = UIActivityIndicatorView(style: .gray)
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -67,8 +69,19 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.AnimateLogo(LogoView: Logo)
+//        self.presenter?.handleViewDidLoad()
+
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+          Logo.alpha = 0
+      }
     // @@@@@ define the custom refresh indicator @@@@@ //
        func addRefreshControl() {
+        DispatchQueue.main.async {
+        
            guard let customView = Bundle.main.loadNibNamed("CustomRefreshControl", owner: self, options: nil) else {
                return
            }
@@ -76,19 +89,22 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
                return
            }
            refreshView.tag = 12052018
-           refreshView.frame = refreshControlView.bounds
-           refreshControlView.addSubview(refreshView)
-           refreshControlView.tintColor = UIColor.clear
-           refreshControlView.backgroundColor = UIColor.clear
-           refreshControlView.addTarget(self, action: #selector(refreshContents), for: .valueChanged)
+            refreshView.frame = self.refreshControlView.bounds
+            self.refreshControlView.addSubview(refreshView)
+            self.refreshControlView.tintColor = UIColor.clear
+            self.refreshControlView.backgroundColor = UIColor.clear
+            self.refreshControlView.addTarget(self, action: #selector(self.refreshContents), for: .valueChanged)
          
+        }
        }
 
     @objc func refreshContents() {
-        if NextPage == false {
+        DispatchQueue.main.async {
+            
+            if self.NextPage == false {
             self.showAlert(title: "", message: "There is no other pages")
         }else{
-            let refreshView = refreshControlView.viewWithTag(12052018)
+            let refreshView = self.refreshControlView.viewWithTag(12052018)
                    for vw in (refreshView?.subviews)! {
                            if let indicator = vw as? NVActivityIndicatorView {
                              indicator.startAnimating()
@@ -96,7 +112,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
                    }
             self.perform(#selector(self.finishedRefreshing), with: nil, afterDelay: 1.5)
         }
-
+        }
 
        }
      
@@ -124,6 +140,8 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
                 self.PaginationButton.removeFromSuperview()
             }
         }else{
+                
+            
         UIView.animate(withDuration: 1) {
             self.ScrollBottomConstraints.constant = 50
             self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination-1"), for: .normal)
@@ -135,10 +153,12 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
             self.PaginationButton.topAnchor.constraint(equalToSystemSpacingBelow: self.ScrollGamesCollection.bottomAnchor, multiplier: 1).isActive = true
             self.PaginationButton.centerXAnchor.constraint(equalTo: self.ScrollGamesCollection.centerXAnchor).isActive = true
 
-        }
+        
+            }
         }
     }
       
+    @IBOutlet weak var Logo: UIImageView!
     @IBOutlet weak var ScrollBottomConstraints: NSLayoutConstraint!
     @IBOutlet weak var ComingGamesCollection: UICollectionView!
     @IBOutlet weak var ScrollGamesCollection: UICollectionView!
