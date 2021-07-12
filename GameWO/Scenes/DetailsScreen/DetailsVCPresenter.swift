@@ -29,19 +29,22 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                 case .success(let response):
                 print(response)
                 self.details = response
-                self.view?.hideLoading()
-                if let gameDetails = self.details {
-                    self.view?.reloadVCDetails(Details: gameDetails)
-                    self.PlatformsData = gameDetails.platforms ?? []
-                    self.storeDetails = gameDetails.stores ?? []
-                    
-                    self.view?.reloadPlatforms()
-                    self.view?.reloadStores()
-                }
+                        self.view?.hideLoading()
+                        if let gameDetails = self.details {
+                            self.view?.reloadVCDetails(Details: gameDetails)
+                            self.PlatformsData = gameDetails.platforms ?? []
+                            self.storeDetails = gameDetails.stores ?? []
+                            
+                            self.view?.reloadPlatforms()
+                            self.view?.reloadStores()
+                        }
+//
+           
                 case .failure(let FailResponse):
-                self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
-                print(FailResponse)
+                        self.view?.hideLoading()
+                        self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                        print(FailResponse)
+//
                 case .failureError(let error):
                     print(error)
                 }
@@ -56,11 +59,15 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                 case .success(let response):
                 print(response)
                 self.Screens = response.results ?? []
-                self.view?.hideLoading()
-                self.view?.reloadScreenshots()
+                        self.view?.hideLoading()
+                        self.view?.reloadScreenshots()
+//
+           
                 case .failure(let FailResponse):
-                self.view?.hideLoading()
-                self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                        self.view?.hideLoading()
+                        self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+
+//
                 print(FailResponse)
                 case .failureError(let error):
                     print(error)
@@ -75,17 +82,21 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                    switch result {
                    case .success(let response):
                    print(response)
-                   if response.results?.count == 0 {
-                    self.view?.removeTrailerCollection()
-                   }else
-                   {
-                   self.trailer = response.results ?? []
-                   self.view?.hideLoading()
-                   self.view?.reloadTrailerVideos()
-                    }
+                        if response.results?.count == 0 {
+                         self.view?.removeTrailerCollection()
+                        }else
+                        {
+                        self.trailer = response.results ?? []
+                        self.view?.hideLoading()
+                        self.view?.reloadTrailerVideos()
+                         }
+                    
+               
                    case .failure(let FailResponse):
-                   self.view?.hideLoading()
-                   self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                        self.view?.hideLoading()
+                        self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                    
+                
                    print(FailResponse)
                    case .failureError(let error):
                     print(error)

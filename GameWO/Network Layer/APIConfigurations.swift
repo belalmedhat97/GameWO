@@ -19,6 +19,7 @@ public var urlRequest: URLRequest {
     guard let url = URL(string: Endpoints.BaseUrlRawgGames) else {
     fatalError("URL could not be built")
     }
+    print(url)
     var request = URLRequest(url: url.appendingPathComponent(path))
     
     
@@ -34,14 +35,11 @@ public var urlRequest: URLRequest {
                            return URLQueryItem(name: pair.key, value: "\(pair.value)")
                        }
                 
-//                queryParams += URLQueryItem(name: "key", value: SecretsManager.shared.getApiKey() ?? "")
                 var components = URLComponents(string:url.appendingPathComponent(path).absoluteString)
                 components?.queryItems = queryParams
                 components?.queryItems?.append(URLQueryItem(name: "key", value: "\(SecretsManager.shared.getApiKey() ?? "")"))
-
-                print(components?.queryItems)
+                
                 request.url = components?.url
-                print(request.url)
 
                case .NoParamter:
                    request.httpBody = nil

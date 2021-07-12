@@ -10,7 +10,8 @@ import Foundation
 struct Endpoints {
 
 // Games Data Api https://rawg.io/
-static let BaseUrlRawgGames = "https://api.rawg.io/api"
+    
+static let BaseUrlRawgGames = "https://api.rawg.io/api?key=\(SecretsManager.shared.getApiKey() ?? "")"
 static let genres = "/genres"
 static let genresDetails = "/genres/"
 static let gamesList = "/games"

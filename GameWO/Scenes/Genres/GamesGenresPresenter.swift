@@ -20,12 +20,16 @@ class GamesGenresPresenter:GamesGenresPresenterProtocols{
             case .success(let response):
             print(response)
             self.Genre = response.results ?? []
-            self.view?.hideLoading()
-            self.view?.reloadGenreCollection()
+                    self.view?.hideLoading()
+                    self.view?.reloadGenreCollection()
+                
+        
                 
             case .failure(let FailResponse):
-            self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                    self.view?.hideLoading()
+                    self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                
+         
                 print(FailResponse.error ?? "")
             case .failureError(let error):
                 print(error)

@@ -80,7 +80,6 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
       }
     // @@@@@ define the custom refresh indicator @@@@@ //
        func addRefreshControl() {
-        DispatchQueue.main.async {
         
            guard let customView = Bundle.main.loadNibNamed("CustomRefreshControl", owner: self, options: nil) else {
                return
@@ -95,11 +94,9 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
             self.refreshControlView.backgroundColor = UIColor.clear
             self.refreshControlView.addTarget(self, action: #selector(self.refreshContents), for: .valueChanged)
          
-        }
        }
 
     @objc func refreshContents() {
-        DispatchQueue.main.async {
             
             if self.NextPage == false {
             self.showAlert(title: "", message: "There is no other pages")
@@ -114,7 +111,6 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
         }
         }
 
-       }
      
      @objc func finishedRefreshing() {
         StartPage+=1
@@ -144,7 +140,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
             
         UIView.animate(withDuration: 1) {
             self.ScrollBottomConstraints.constant = 50
-            self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination-1"), for: .normal)
+            self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination"), for: .normal)
             self.PaginationButton.addTarget(self, action: #selector(self.BackPagination), for: .touchUpInside)
             self.view.addSubview(self.PaginationButton)
             self.PaginationButton.translatesAutoresizingMaskIntoConstraints = false
@@ -205,10 +201,9 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     func reloadScrollCollection() {
         if NextPage == true && PreviousPage == true {
             ScrollGamesCollection.reloadData()
-            DispatchQueue.main.async {
                        let lastItemIndex = NSIndexPath(item: 0, section: 0)
                        self.ScrollGamesCollection.scrollToItem(at: lastItemIndex as IndexPath, at: .top, animated: true)
-            }
+            
        
             
         }else{

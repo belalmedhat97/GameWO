@@ -27,6 +27,7 @@ class GenreSelectedVC: BaseViewController,GenreSelectedViewProtocols {
         self.GenreTitle.text = Title
     }
     
+    @IBOutlet weak var Logo: UIImageView!
     @IBOutlet weak var GenreTitle: UILabel!
     @IBOutlet weak var GenreCollection: UICollectionView!
     
