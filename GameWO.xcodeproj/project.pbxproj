@@ -32,6 +32,7 @@
 		5745C7252520DA52000AAC7A /* TrailersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5745C7242520DA52000AAC7A /* TrailersResponse.swift */; };
 		5754B781251E13E700E6CEF0 /* StoreClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754B780251E13E700E6CEF0 /* StoreClassCell.swift */; };
 		5754B783251E13F800E6CEF0 /* StoreViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5754B782251E13F800E6CEF0 /* StoreViewCell.xib */; };
+		57563BF7269B77DE0073965A /* SecretsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57563BF6269B77DE0073965A /* SecretsManager.swift */; };
 		575D93EF249D183500915475 /* IdentfierConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D93EE249D183500915475 /* IdentfierConstant.swift */; };
 		576A3A6B25389F120072E337 /* ScreenShotViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 576A3A6A25389F120072E337 /* ScreenShotViewCell.xib */; };
 		576A3A6D25389F520072E337 /* ScreenShotClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576A3A6C25389F520072E337 /* ScreenShotClassCell.swift */; };
@@ -67,8 +68,6 @@
 		57970C5C24B1795100986652 /* GamesGenres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57970C5B24B1795100986652 /* GamesGenres.swift */; };
 		57A2CF1B25E525C8004F7B69 /* GamesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2CF1A25E525C7004F7B69 /* GamesApi.swift */; };
 		57A2CF1D25E525DE004F7B69 /* StoresApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2CF1C25E525DD004F7B69 /* StoresApi.swift */; };
-		57A6F4E224959EF6006BF985 /* DataStoreConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A6F4E124959EF6006BF985 /* DataStoreConstant.swift */; };
-		57A6F4E42495A030006BF985 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A6F4E32495A030006BF985 /* DataStoreManager.swift */; };
 		57BEE7FA24C40DF2006EC2D3 /* AnimationManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BEE7F924C40DF2006EC2D3 /* AnimationManger.swift */; };
 		57C3884C258F7BA600F4F8FF /* errorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C3884B258F7BA600F4F8FF /* errorViewController.swift */; };
 		57DECBE924BB8FFE00913B91 /* NetworkCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DECBE824BB8FFE00913B91 /* NetworkCaller.swift */; };
@@ -106,6 +105,8 @@
 		5745C7242520DA52000AAC7A /* TrailersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailersResponse.swift; sourceTree = "<group>"; };
 		5754B780251E13E700E6CEF0 /* StoreClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreClassCell.swift; sourceTree = "<group>"; };
 		5754B782251E13F800E6CEF0 /* StoreViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreViewCell.xib; sourceTree = "<group>"; };
+		57563BF5269B741F0073965A /* APPSecrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APPSecrets.xcconfig; sourceTree = "<group>"; };
+		57563BF6269B77DE0073965A /* SecretsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretsManager.swift; sourceTree = "<group>"; };
 		575D93EE249D183500915475 /* IdentfierConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentfierConstant.swift; sourceTree = "<group>"; };
 		576A3A6A25389F120072E337 /* ScreenShotViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenShotViewCell.xib; sourceTree = "<group>"; };
 		576A3A6C25389F520072E337 /* ScreenShotClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotClassCell.swift; sourceTree = "<group>"; };
@@ -141,8 +142,6 @@
 		57970C5B24B1795100986652 /* GamesGenres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesGenres.swift; sourceTree = "<group>"; };
 		57A2CF1A25E525C7004F7B69 /* GamesApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesApi.swift; sourceTree = "<group>"; };
 		57A2CF1C25E525DD004F7B69 /* StoresApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoresApi.swift; sourceTree = "<group>"; };
-		57A6F4E124959EF6006BF985 /* DataStoreConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreConstant.swift; sourceTree = "<group>"; };
-		57A6F4E32495A030006BF985 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		57BEE7F924C40DF2006EC2D3 /* AnimationManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationManger.swift; sourceTree = "<group>"; };
 		57C3884B258F7BA600F4F8FF /* errorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorViewController.swift; sourceTree = "<group>"; };
 		57DECBE824BB8FFE00913B91 /* NetworkCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCaller.swift; sourceTree = "<group>"; };
@@ -262,6 +261,15 @@
 				5754B782251E13F800E6CEF0 /* StoreViewCell.xib */,
 			);
 			path = StoreCollectionCells;
+			sourceTree = "<group>";
+		};
+		57563BF4269B73EA0073965A /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+				57563BF5269B741F0073965A /* APPSecrets.xcconfig */,
+				57563BF6269B77DE0073965A /* SecretsManager.swift */,
+			);
+			path = Secrets;
 			sourceTree = "<group>";
 		};
 		575D93F0249D3EFE00915475 /* Models */ = {
@@ -436,15 +444,6 @@
 			path = Genres;
 			sourceTree = "<group>";
 		};
-		57A6F4E024959E79006BF985 /* DataStoreLayer */ = {
-			isa = PBXGroup;
-			children = (
-				57A6F4E124959EF6006BF985 /* DataStoreConstant.swift */,
-				57A6F4E32495A030006BF985 /* DataStoreManager.swift */,
-			);
-			path = DataStoreLayer;
-			sourceTree = "<group>";
-		};
 		57A965E624CA801400B278C9 /* CustomRefreshLoader */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,9 +484,9 @@
 				57754143248C5E4E004C35F5 /* StoryBoards */,
 				57754141248C5E2F004C35F5 /* Scenes */,
 				57754144248C5E72004C35F5 /* AppBase */,
+				57563BF4269B73EA0073965A /* Secrets */,
 				570356742492765100C45537 /* Helper Extension */,
 				57415A4A2495562900C37B37 /* Network Layer */,
-				57A6F4E024959E79006BF985 /* DataStoreLayer */,
 				5703568324927D0000C45537 /* AppConstant */,
 				575D93F0249D3EFE00915475 /* Models */,
 				5742C7B4268207020011ED45 /* GameWO.mov */,
@@ -674,7 +673,6 @@
 				5775800D24BAB45A000273A2 /* MainHomeGamesPresenter.swift in Sources */,
 				57970C5C24B1795100986652 /* GamesGenres.swift in Sources */,
 				578D82BC25024178002D32F6 /* GameGenresResponse.swift in Sources */,
-				57A6F4E224959EF6006BF985 /* DataStoreConstant.swift in Sources */,
 				5775802124BAC526000273A2 /* GameListResponse.swift in Sources */,
 				57FB6E40259121FE00D5D2BE /* GenreSelectedProtocols.swift in Sources */,
 				5782755025AF53B60065BC8F /* StoreSelectedProtocols.swift in Sources */,
@@ -703,8 +701,8 @@
 				5754B781251E13E700E6CEF0 /* StoreClassCell.swift in Sources */,
 				5711474025895416001D7A70 /* GameDetailsStoreClassCell.swift in Sources */,
 				57DECBE924BB8FFE00913B91 /* NetworkCaller.swift in Sources */,
+				57563BF7269B77DE0073965A /* SecretsManager.swift in Sources */,
 				57415A4C2495565D00C37B37 /* APIConfigurations.swift in Sources */,
-				57A6F4E42495A030006BF985 /* DataStoreManager.swift in Sources */,
 				578E30DC258A6D33009F1142 /* DetailsDesign.swift in Sources */,
 				57C3884C258F7BA600F4F8FF /* errorViewController.swift in Sources */,
 				578E30E1258A90D6009F1142 /* SearchGamesProtocols.swift in Sources */,
@@ -728,6 +726,7 @@
 /* Begin XCBuildConfiguration section */
 		57F8DAF5248C317100616905 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57563BF5269B741F0073965A /* APPSecrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -788,6 +787,7 @@
 		};
 		57F8DAF6248C317100616905 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57563BF5269B741F0073965A /* APPSecrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

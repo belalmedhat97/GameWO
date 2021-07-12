@@ -9,6 +9,7 @@
 import UIKit
 extension BaseViewController{
    func Loader(removeFromView:Bool){
+
         guard removeFromView == false else {
             ViewCenter.removeFromSuperview()
             Indicator.removeFromSuperview()

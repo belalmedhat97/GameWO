@@ -12,8 +12,10 @@ class StartScreenVC: BaseViewController {
     var player :AVPlayer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        playStartVideo()
-        view.backgroundColor = .clear
+            self.playStartVideo()
+            self.view.backgroundColor = .clear
+        
+  
         // Do any additional setup after loading the view.
     }
     @IBOutlet var content: UIView!
