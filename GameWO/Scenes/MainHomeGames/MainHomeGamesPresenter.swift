@@ -27,16 +27,14 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
              case .success(let response):
                  print(response)
                  self.comeList = response.results ?? []
-                DispatchQueue.main.async {
                     self.view?.hideLoading()
                     self.view?.reloadComingCollection()
-                }
+                
                 
              case .failure(let FailResponse):
-                DispatchQueue.main.async {
                     self.view?.hideLoading()
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
-                }
+                
                
                  print(FailResponse)
             case .failureError(let error):
@@ -71,30 +69,26 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
                  print(response)
                  if response.next != nil { self.view?.NextPage = true } else {self.view?.NextPage = false}
                  if response.previous != nil { self.view?.PreviousPage = true
-                    DispatchQueue.main.async {
                         self.view?.ChangeScrollCollectionBottom()
 
-                    }
+                    
                  } else {self.view?.PreviousPage = false
-                    DispatchQueue.main.async {
                         self.view?.ChangeScrollCollectionBottom()
 
-                    }
+                    
                  }
                  self.scrollList = response.results ?? []
                  if showloader == true {
                     self.view?.hideLoading()
                  }
-                DispatchQueue.main.async {
                     self.view?.reloadScrollCollection()
 
-                }
+                
                 completionHandler()
              case .failure(let FailResponse):
-                DispatchQueue.main.async {
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
 
-                }
+                
                  print(FailResponse)
                 completionHandler()
             case .failureError(let error):

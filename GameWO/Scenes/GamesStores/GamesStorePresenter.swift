@@ -21,11 +21,15 @@ class GameStorePresenter:GamesStorePresenterProtocol{
             case .success(let response):
             print(response)
             self.Stores = response.results ?? []
-            self.view?.hideLoading()
-            self.view?.reloadStoreCollection()
+                    self.view?.hideLoading()
+                    self.view?.reloadStoreCollection()
+                
+         
             case .failure(let FailResponse):
-            self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                    self.view?.hideLoading()
+                    self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                
+            
             print(FailResponse)
             case .failureError(let error):
                 print(error)

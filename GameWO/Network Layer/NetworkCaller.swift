@@ -16,6 +16,7 @@ class Network{
         let RequesterTask = session.dataTask(with: URL) { (data, response, error) in
             guard error == nil else {return}
             if let HTTPResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
                 
                 switch HTTPResponse.statusCode {
                 case 200..<300:
@@ -39,6 +40,7 @@ class Network{
             }
                 default:
                     print("")
+                }
                 }
           
         }

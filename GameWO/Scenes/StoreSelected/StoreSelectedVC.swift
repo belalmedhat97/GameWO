@@ -118,7 +118,7 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
           }else{
           UIView.animate(withDuration: 1) {
               self.StoreListBottomConstraints.constant = 50
-              self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination-2"), for: .normal)
+              self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination"), for: .normal)
               self.PaginationButton.addTarget(self, action: #selector(self.BackPagination), for: .touchUpInside)
               self.view.addSubview(self.PaginationButton)
               self.PaginationButton.translatesAutoresizingMaskIntoConstraints = false

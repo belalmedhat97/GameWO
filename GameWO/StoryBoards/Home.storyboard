@@ -910,9 +910,8 @@
                     <tabBarItem key="tabBarItem" title="Home" image="Home" id="Yqm-VV-o4g"/>
                     <connections>
                         <outlet property="GenreCollection" destination="cbc-Wb-bM5" id="mBf-KX-Xkm"/>
-                        <outlet property="GenreListBottomConstraints" destination="Btu-bC-nIM" id="mpr-dk-fAv"/>
                         <outlet property="GenreTitle" destination="4a4-Dl-T9Q" id="uaS-vF-25S"/>
-                        <outlet property="Logo" destination="fyr-f0-OSB" id="1Oe-ma-rUG"/>
+                        <outlet property="Logo" destination="fyr-f0-OSB" id="Fib-yx-NnX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cx6-pL-exn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

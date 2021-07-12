@@ -19,19 +19,22 @@ class SearchGamesPresenter:SearchGamesPresenterProtocols{
             switch Result {
             case .success(let response):
             print(response)
-            if response.results?.count == 0 {
-                self.view?.showError(show:true)
-            }else{
-                self.view?.showError(show:false)
+                    if response.results?.count == 0 {
+                        self.view?.showError(show:true)
+                    }else{
+                        self.view?.showError(show:false)
 
-            }
-            self.gameList = response.results ?? []
+                    }
+                    self.gameList = response.results ?? []
 
-            self.view?.hideLoading()
-            self.view?.reloadGamesCollection()
+                    self.view?.hideLoading()
+                    self.view?.reloadGamesCollection()
+                        
             case .failure(let FailResponse):
-            self.view?.hideLoading()
-            self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                    self.view?.hideLoading()
+                    self.view?.showAlert(title: "", message: FailResponse.error ?? "")
+                
+           
             print(FailResponse)
                 
             case .failureError(let error):

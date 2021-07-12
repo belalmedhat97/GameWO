@@ -62,11 +62,11 @@ class UItabBarControllerVC: UITabBarController,UITabBarControllerDelegate{
     private func setTabsControllers() {
         let vc = UIStoryboard(name: Storyboards.Home, bundle: nil).instantiateViewController(withIdentifier: ScreenID.MainHomeGamesVC)
         vc.tabBarItem.title = "Home"
-        vc.tabBarItem.image = #imageLiteral(resourceName: "Home")
+        vc.tabBarItem.image = #imageLiteral(resourceName: "icons8-home-500")
     
       let vc1 = UIStoryboard(name: Storyboards.Home, bundle: nil).instantiateViewController(withIdentifier: ScreenID.GamesGenres)
         vc1.tabBarItem.title = "Genre"
-        vc1.tabBarItem.image = #imageLiteral(resourceName: "Genre")
+        vc1.tabBarItem.image = #imageLiteral(resourceName: "icons8-game-controller-100")
         let vc3 = UIStoryboard(name: Storyboards.Home, bundle: nil).instantiateViewController(withIdentifier: ScreenID.SearchGamesVC)
         vc3.tabBarItem.title = "Search"
         vc3.tabBarItem.image = #imageLiteral(resourceName: "search")
