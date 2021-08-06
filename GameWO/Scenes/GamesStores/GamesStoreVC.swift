@@ -21,15 +21,22 @@ class GamesStoreVC: BaseViewController, GamesStoreViewProtocol {
         StoreCollection.delegate = self
         StoreCollection.dataSource = self
         StoreCollection.register(UINib(nibName: "StoreViewCell", bundle: nil), forCellWithReuseIdentifier: "StoreClassCell")
-        self.presenter?.handleViewDidLoad()
 
     }
     override func viewWillDisappear(_ animated: Bool) {
-          Logo.alpha = 0
+        Logo.alpha = 0
+        
       }
     @IBOutlet weak var Logo: UIImageView!
     override func viewWillAppear(_ animated: Bool) {
         self.AnimateLogo(LogoView: Logo)
+        self.presenter?.handleViewDidLoad()
+
+
+
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        self.presenter?.ResetStoreList()
 
     }
     func reloadStoreCollection() {

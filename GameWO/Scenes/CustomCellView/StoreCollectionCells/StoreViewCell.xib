@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,7 +38,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-rv-Sia">
                                 <rect key="frame" x="0.0" y="47" width="341" height="1"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" systemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="8SV-C4-yn4"/>
                                 </constraints>
@@ -72,11 +72,11 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oln-Bi-a3v">
-                        <rect key="frame" x="303" y="203" width="30" height="30"/>
+                        <rect key="frame" x="293" y="193" width="40" height="40"/>
                         <color key="backgroundColor" red="0.4823529412" green="0.92941176469999998" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="ID9-Qb-csr"/>
-                            <constraint firstAttribute="height" constant="30" id="P1O-W4-IEE"/>
+                            <constraint firstAttribute="width" constant="40" id="ID9-Qb-csr" userLabel="width = 40"/>
+                            <constraint firstAttribute="height" constant="40" id="P1O-W4-IEE" userLabel="height = 40"/>
                         </constraints>
                         <state key="normal" image="link"/>
                         <userDefinedRuntimeAttributes>
@@ -90,6 +90,7 @@
                     </button>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="7nx-nm-mC7"/>
             <constraints>
                 <constraint firstItem="qbv-Y4-Zj1" firstAttribute="top" secondItem="Ydd-LY-S47" secondAttribute="top" id="5Uv-iB-eNa"/>
                 <constraint firstItem="vBa-j4-zEa" firstAttribute="top" secondItem="Oln-Bi-a3v" secondAttribute="bottom" constant="8" id="8GS-xQ-VOa"/>
@@ -102,7 +103,6 @@
                 <constraint firstAttribute="trailing" secondItem="Oln-Bi-a3v" secondAttribute="trailing" constant="8" id="x0M-zP-nVv"/>
                 <constraint firstAttribute="trailing" secondItem="qbv-Y4-Zj1" secondAttribute="trailing" id="zN1-dx-nLm"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="7nx-nm-mC7"/>
             <size key="customSize" width="341" height="344"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -128,5 +128,8 @@
         <namedColor name="AppTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

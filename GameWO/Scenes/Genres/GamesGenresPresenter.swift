@@ -8,6 +8,8 @@
 
 import Foundation
 class GamesGenresPresenter:GamesGenresPresenterProtocols{
+  
+    
   weak var view:GamesGenresViewProtocols?
   private var Genre:[GenreResult] = []
     init(view:GamesGenresViewProtocols) {
@@ -40,6 +42,10 @@ class GamesGenresPresenter:GamesGenresPresenterProtocols{
     
     func GenreList() -> [GenreResult] {
         self.Genre
+    }
+    func ResetGenreList() {
+        self.Genre = []
+        self.view?.reloadGenreCollection()
     }
     
     

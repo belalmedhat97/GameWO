@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19363558B9703D3B6FAE9EEC /* Pods_GameWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 931957CC483FAC1B38EE2D44 /* Pods_GameWO.framework */; };
 		5703568524927F4700C45537 /* BaseDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5703568424927F4700C45537 /* BaseDesign.swift */; };
 		5711474025895416001D7A70 /* GameDetailsStoreClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5711473E25895416001D7A70 /* GameDetailsStoreClassCell.swift */; };
 		5711474125895416001D7A70 /* GameDetailsStoreViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5711473F25895416001D7A70 /* GameDetailsStoreViewCell.xib */; };
@@ -78,9 +77,11 @@
 		57FB6E3E259121EA00D5D2BE /* GenreSelectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB6E3D259121EA00D5D2BE /* GenreSelectedVC.swift */; };
 		57FB6E40259121FE00D5D2BE /* GenreSelectedProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB6E3F259121FE00D5D2BE /* GenreSelectedProtocols.swift */; };
 		57FB6E422591221700D5D2BE /* GenreSelectedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB6E412591221700D5D2BE /* GenreSelectedPresenter.swift */; };
+		D159BE3CC59F792AE8BC5FFD /* Pods_GameWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24952A55A0E90CBE0CB1BDEB /* Pods_GameWO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24952A55A0E90CBE0CB1BDEB /* Pods_GameWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5703568424927F4700C45537 /* BaseDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDesign.swift; sourceTree = "<group>"; };
 		5711473E25895416001D7A70 /* GameDetailsStoreClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsStoreClassCell.swift; sourceTree = "<group>"; };
 		5711473F25895416001D7A70 /* GameDetailsStoreViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameDetailsStoreViewCell.xib; sourceTree = "<group>"; };
@@ -154,9 +155,8 @@
 		57FB6E3D259121EA00D5D2BE /* GenreSelectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectedVC.swift; sourceTree = "<group>"; };
 		57FB6E3F259121FE00D5D2BE /* GenreSelectedProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectedProtocols.swift; sourceTree = "<group>"; };
 		57FB6E412591221700D5D2BE /* GenreSelectedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSelectedPresenter.swift; sourceTree = "<group>"; };
-		6F4904897812848DA7A3BE52 /* Pods-GameWO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameWO.debug.xcconfig"; path = "Target Support Files/Pods-GameWO/Pods-GameWO.debug.xcconfig"; sourceTree = "<group>"; };
-		931957CC483FAC1B38EE2D44 /* Pods_GameWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D36EE7A722D49229BBBAF193 /* Pods-GameWO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameWO.release.xcconfig"; path = "Target Support Files/Pods-GameWO/Pods-GameWO.release.xcconfig"; sourceTree = "<group>"; };
+		AAC7B597C174AF0454A8133A /* Pods-GameWO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameWO.debug.xcconfig"; path = "Target Support Files/Pods-GameWO/Pods-GameWO.debug.xcconfig"; sourceTree = "<group>"; };
+		F69E0F63442FFDF035239C37 /* Pods-GameWO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameWO.release.xcconfig"; path = "Target Support Files/Pods-GameWO/Pods-GameWO.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19363558B9703D3B6FAE9EEC /* Pods_GameWO.framework in Frameworks */,
+				D159BE3CC59F792AE8BC5FFD /* Pods_GameWO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +212,14 @@
 				571B29E6256E5E25006DF516 /* PlatformClassCell.swift */,
 			);
 			path = PlatformsTableViewCell;
+			sourceTree = "<group>";
+		};
+		571D9367F05A39078ED3E03A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24952A55A0E90CBE0CB1BDEB /* Pods_GameWO.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		571D9604251CD8D900B77C7C /* GamesStores */ = {
@@ -466,7 +474,7 @@
 				57F8DAE5248C316F00616905 /* GameWO */,
 				57F8DAE4248C316F00616905 /* Products */,
 				98761A9F222FC30458D122D6 /* Pods */,
-				77146E68CCE41E92548B0EA9 /* Frameworks */,
+				571D9367F05A39078ED3E03A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -508,19 +516,11 @@
 			path = GenreSelected;
 			sourceTree = "<group>";
 		};
-		77146E68CCE41E92548B0EA9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				931957CC483FAC1B38EE2D44 /* Pods_GameWO.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		98761A9F222FC30458D122D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6F4904897812848DA7A3BE52 /* Pods-GameWO.debug.xcconfig */,
-				D36EE7A722D49229BBBAF193 /* Pods-GameWO.release.xcconfig */,
+				AAC7B597C174AF0454A8133A /* Pods-GameWO.debug.xcconfig */,
+				F69E0F63442FFDF035239C37 /* Pods-GameWO.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -532,11 +532,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 57F8DAF7248C317100616905 /* Build configuration list for PBXNativeTarget "GameWO" */;
 			buildPhases = (
-				ABB4EA93C9DB5D6567EB48DC /* [CP] Check Pods Manifest.lock */,
+				C2DD9B228C5917AD718A2AAB /* [CP] Check Pods Manifest.lock */,
 				57F8DADF248C316F00616905 /* Sources */,
 				57F8DAE0248C316F00616905 /* Frameworks */,
 				57F8DAE1248C316F00616905 /* Resources */,
-				D73C9398401511B33966D745 /* [CP] Embed Pods Frameworks */,
+				4D9C01976761B0E510233590 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -605,7 +605,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ABB4EA93C9DB5D6567EB48DC /* [CP] Check Pods Manifest.lock */ = {
+		4D9C01976761B0E510233590 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2DD9B228C5917AD718A2AAB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -625,23 +642,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D73C9398401511B33966D745 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameWO/Pods-GameWO-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -842,7 +842,7 @@
 		};
 		57F8DAF8248C317100616905 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F4904897812848DA7A3BE52 /* Pods-GameWO.debug.xcconfig */;
+			baseConfigurationReference = AAC7B597C174AF0454A8133A /* Pods-GameWO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -862,7 +862,7 @@
 		};
 		57F8DAF9248C317100616905 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D36EE7A722D49229BBBAF193 /* Pods-GameWO.release.xcconfig */;
+			baseConfigurationReference = F69E0F63442FFDF035239C37 /* Pods-GameWO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

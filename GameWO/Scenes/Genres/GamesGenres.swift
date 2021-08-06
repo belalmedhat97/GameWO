@@ -19,7 +19,6 @@ class GamesGenres: BaseViewController,GamesGenresViewProtocols{
         GenresCollection.delegate = self
         GenresCollection.dataSource = self
         GenresCollection.register(UINib(nibName: "GenreViewCell", bundle: nil), forCellWithReuseIdentifier: "GenreClassCell")
-//        self.AnimateLogo(LogoView: Logo)
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +30,9 @@ class GamesGenres: BaseViewController,GamesGenresViewProtocols{
     override func viewWillDisappear(_ animated: Bool) {
           Logo.alpha = 0
       }
+    override func viewDidDisappear(_ animated: Bool) {
+        self.presenter?.ResetGenreList()
+    }
     @IBOutlet weak var Logo: UIImageView!
     func reloadGenreCollection() {
         self.GenresCollection.reloadData()

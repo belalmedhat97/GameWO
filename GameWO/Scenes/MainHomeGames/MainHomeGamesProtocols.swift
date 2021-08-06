@@ -13,7 +13,7 @@ protocol MainHomeGamesViewProtocols:BaseViewProtocol {
     var NextPage:Bool? { get set }
     var PreviousPage:Bool? { get set }
     func reloadComingCollection()
-    func reloadScrollCollection()
+    func reloadPopularCollection()
     func ChangeScrollCollectionBottom()
 }
 protocol MainHomeGamesPresenterProtocols {
@@ -25,6 +25,5 @@ protocol MainHomeGamesPresenterProtocols {
     func actionFilterList() -> ContextMenu
     func AddFilterData()
     func getDatePeriod() -> String
-
-    
+    func ResetCollectionsList()
 }

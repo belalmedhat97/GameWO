@@ -17,6 +17,6 @@ protocol GamesStorePresenterProtocol {
     var view:GamesStoreViewProtocol? { get set }
     func handleViewDidLoad()
     func StoreList() -> [StoreResults]
-
+    func ResetStoreList()
 
 }
