@@ -41,6 +41,9 @@ class GameStorePresenter:GamesStorePresenterProtocol{
     func StoreList() -> [StoreResults] {
         self.Stores
     }
-    
+    func ResetStoreList() {
+        self.Stores = []
+        self.view?.reloadStoreCollection()
+    }
     
 }

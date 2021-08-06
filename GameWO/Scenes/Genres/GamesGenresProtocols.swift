@@ -15,4 +15,6 @@ protocol GamesGenresPresenterProtocols {
     var view:GamesGenresViewProtocols? {get set}
     func handleViewDidLoad()
     func GenreList() -> [GenreResult]
+    func ResetGenreList()
+
 }

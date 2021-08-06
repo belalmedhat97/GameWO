@@ -44,8 +44,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
         self.presenter?.AddFilterData()
         ComingGamesCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
         ScrollGamesCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
-        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "10", Page: "\(StartPage)", ordering:OrderingField, completionHandler:{})
-        self.presenter?.handleViewDidLoadComing()
+
         
         Filter.addContextMenu((self.presenter?.actionFilterList())!, for: .tap(numberOfTaps: 1))
         transition.dismissCompletion = { [weak self] in
@@ -71,13 +70,17 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     
     override func viewWillAppear(_ animated: Bool) {
         self.AnimateLogo(LogoView: Logo)
-//        self.presenter?.handleViewDidLoad()
+        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "10", Page: "\(StartPage)", ordering:OrderingField, completionHandler:{})
+        self.presenter?.handleViewDidLoadComing()
 
 
     }
     override func viewWillDisappear(_ animated: Bool) {
           Logo.alpha = 0
       }
+    override func viewDidDisappear(_ animated: Bool) {
+        self.presenter?.ResetCollectionsList()
+    }
     // @@@@@ define the custom refresh indicator @@@@@ //
        func addRefreshControl() {
         
@@ -198,7 +201,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
         ComingGamesCollection.reloadData()
     }
     
-    func reloadScrollCollection() {
+    func reloadPopularCollection() {
         if NextPage == true && PreviousPage == true {
             ScrollGamesCollection.reloadData()
                        let lastItemIndex = NSIndexPath(item: 0, section: 0)

@@ -9,11 +9,12 @@
 import Foundation
 import SwiftyContextMenu
 class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
+
    
     
    weak var view: MainHomeGamesViewProtocols?
     private var comeList:[Results] = []
-    private var scrollList:[Results] = []
+    private var popularlList:[Results] = []
     private var action:[ContextMenuAction] = []
     private var popularListOptions:[String] = ["name","released","added","created","rating"]
     init(view:MainHomeGamesViewProtocols) {
@@ -77,11 +78,11 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
 
                     
                  }
-                 self.scrollList = response.results ?? []
+                 self.popularlList = response.results ?? []
                  if showloader == true {
                     self.view?.hideLoading()
                  }
-                    self.view?.reloadScrollCollection()
+                    self.view?.reloadPopularCollection()
 
                 
                 completionHandler()
@@ -113,10 +114,18 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
         self.comeList
     }
     func ScrollList() -> [Results]{
-        self.scrollList
+        self.popularlList
     }
     func actionFilterList() -> ContextMenu{
          let contextMenu = ContextMenu(title: "Filter Options", actions: action)
          return contextMenu
+    }
+   
+    
+    func ResetCollectionsList() {
+        self.comeList = []
+        self.popularlList = []
+        self.view?.reloadComingCollection()
+        self.view?.reloadPopularCollection()
     }
 }
