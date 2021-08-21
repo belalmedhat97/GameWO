@@ -19,7 +19,6 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
         var NextPage:Bool? // detect if there is next page in API
         var PreviousPage:Bool? // detect if there is previous page in API
         var StartPage:Int = 1 // first page of pagination
-    //    var OrderingField:String = "" // indicate which ordering Type By Filter Button
     var ID:String?
     var Title: String?
     override func viewDidLoad() {
@@ -42,7 +41,7 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
         self.GenreTitle.text = Title
     }
     override func viewWillAppear(_ animated: Bool) {
-    self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: true, pageSize: "20", Page: "1", ordering: "", completionHandler: {})
+    self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: true, pageSize: "20", Page: "1", ordering: "-added", completionHandler: {})
         self.AnimateLogo(LogoView: Logo)
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,15 +85,15 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
                                indicator.startAnimating()
                              }
                      }
-              self.perform(#selector(self.finishedRefreshing), with: nil, afterDelay: 1.5)
+              self.perform(#selector(self.ForwardPagination), with: nil, afterDelay: 1.5)
           }
 
 
          }
        
-       @objc func finishedRefreshing() {
+       @objc func ForwardPagination() {
           StartPage+=1
-          self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: ""){ // go next pagination
+          self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: "-added"){ // go next pagination
           let refreshView = self.refreshControlView.viewWithTag(12052018)
           for vw in (refreshView?.subviews)! {
               if let indicator = vw as? NVActivityIndicatorView {
@@ -107,7 +106,7 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
        }
       @objc func BackPagination(){ // go back pagination
           StartPage-=1
-          self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: "", completionHandler: {})
+          self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: "-added", completionHandler: {})
       }
       func ChangeScrollCollectionBottom() { // change bottom constraints and add back pagination buttom
           if PreviousPage == false {
