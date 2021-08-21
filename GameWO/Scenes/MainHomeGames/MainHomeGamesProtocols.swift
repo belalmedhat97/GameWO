@@ -24,6 +24,5 @@ protocol MainHomeGamesPresenterProtocols {
     func ScrollList() -> [Results]
     func actionFilterList() -> ContextMenu
     func AddFilterData()
-    func getDatePeriod() -> String
     func ResetCollectionsList()
 }

@@ -17,21 +17,18 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     private let transition = StretchAnimator() // animation object
     private var ReservedIDplatform:[Int] = [1,2,3,4,5,6,7,8]
     var PaginationButton = UIButton()
+
     private var ComingCase:Bool? // variable to detect if present from scroll or coming collectionviews to make animations
     var NextPage:Bool? // detect if there is next page in API
     var PreviousPage:Bool? // detect if there is previous page in API
     var StartPage:Int = 1 // first page of pagination
-    var OrderingField:String = "" // indicate which ordering Type By Filter Button
     var presenter: MainHomeGamesPresenterProtocols?
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.showLoading()
         Logo.alpha = 0
-
         let spinner = UIActivityIndicatorView(style: .gray)
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
-
         NextPage = false
         PreviousPage = false
         self.ScrollGamesCollection.refreshControl = refreshControlView
@@ -70,8 +67,12 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     
     override func viewWillAppear(_ animated: Bool) {
         self.AnimateLogo(LogoView: Logo)
-        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "10", Page: "\(StartPage)", ordering:OrderingField, completionHandler:{})
-        self.presenter?.handleViewDidLoadComing()
+      
+        
+            self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(self.StartPage)", ordering:"", completionHandler:{})
+            self.presenter?.handleViewDidLoadComing()
+        
+    
 
 
     }
@@ -110,14 +111,14 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
                              indicator.startAnimating()
                            }
                    }
-            self.perform(#selector(self.finishedRefreshing), with: nil, afterDelay: 1.5)
+            self.perform(#selector(self.ForwardPagination), with: nil, afterDelay: 1.5)
         }
         }
 
      
-     @objc func finishedRefreshing() {
+     @objc func ForwardPagination() {
         StartPage+=1
-        self.presenter?.handleViewDidLoadPopular(showloader: false, pageSize: "10", Page: "\(StartPage)", ordering: OrderingField){ // go next pagination
+        self.presenter?.handleViewDidLoadPopular(showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: ""){ // go next pagination
         let refreshView = self.refreshControlView.viewWithTag(12052018)
         for vw in (refreshView?.subviews)! {
             if let indicator = vw as? NVActivityIndicatorView {
@@ -130,7 +131,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
      }
     @objc func BackPagination(){ // go back pagination
         StartPage-=1
-        self.presenter?.handleViewDidLoadPopular(showloader: false, pageSize: "10", Page: "\(StartPage)", ordering: OrderingField, completionHandler: {})
+        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: "", completionHandler: {})
     }
     func ChangeScrollCollectionBottom() { // change bottom constraints and add back pagination buttom
         if PreviousPage == false {
@@ -165,28 +166,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     @objc func RefeshCaller(){
         print("dawdawdawddadadawdwad")
     }
-    //compute the scroll value and play with the threshold to get desired effect
-    // compute time from today to the begining of next year
-    func getDatePeriod() -> String{
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.calendar = .current
-        formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
-        let StringCurrentYear = formatter.string(from: date)
-        print(StringCurrentYear)
-        let calendar = Calendar.current
-        let comingYear = calendar.component(.year, from: date)
-        
-        guard let ComingYearDate = Calendar.current.date(from: DateComponents(year: comingYear + 1, month: +1, day: +2)) else { return "" }
-            let comeYearDate = formatter.string(from: ComingYearDate)
-            print(comeYearDate)
-        return "\(StringCurrentYear),\(comeYearDate)"
-        
-    }
-    @IBAction func FilterButton(_ sender: UIButton) {
-
-    }
+   
   
     /*
     // MARK: - Navigation
@@ -237,41 +217,34 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
                 
             cell.GameImage.sd_imageIndicator = IndicatorColor()
 //                cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name
-            cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ComingList()[indexPath.item].background_image ?? ""), completed: nil)
-                cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name ?? ""
+                cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ComingList()[indexPath.item].background_image ?? ""), completed: nil)
+                cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name ?? "No Name"
                 guard self.presenter?.ComingList()[indexPath.item].parent_platforms != nil else {
 
                     return cell}
-                var PlatformID:[Int] = []
-                for Count in 0...(self.presenter?.ComingList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
-                    print(self.presenter?.ComingList()[indexPath.item].platforms?[Count].platform?.name ?? "")
-                    PlatformID.append(self.presenter?.ComingList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
-                }
+//                var PlatformID:[Int] = []
+//                for Count in 0...(self.presenter?.ComingList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
+////                    print(self.presenter?.ComingList()[indexPath.item].platforms?[Count].platform?.name ?? "")
+//                    PlatformID.append(self.presenter?.ComingList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
+//                }
 
             return cell
          }else{
              let cell = ScrollGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
-//            cell.layer.masksToBounds = false
-//                cell.borderWidth = 1
-//                cell.borderColor = #colorLiteral(red: 0.8588235294, green: 0.8862745098, blue: 0.9294117647, alpha: 1)
+
             cell.clipsToBounds = true
 //            cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name
             cell.GameImage.sd_imageIndicator = IndicatorColor()
             cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ScrollList()[indexPath.item].background_image ?? ""), completed: nil)
-                cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name ?? ""
+                cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name ?? "No Name"
 
-//                guard self.presenter?.ScrollList()[indexPath.item].parent_platforms != nil else {
-//               if cell.contentView.contains(cell.PlatformStack) {
-//               cell.PlatformStack.removeFromSuperview()
-//               }
-//                return cell}
-                var PlatformID:[Int] = []
-                for Count in 0...(self.presenter?.ScrollList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
-                    print(self.presenter?.ScrollList()[indexPath.item].platforms?[Count].platform?.name ?? "")
-                    PlatformID.append(self.presenter?.ScrollList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
-                }
-//                cell.returnview()
-//                cell.SetPlatform(arrayOfPlatformsID: PlatformID)
+
+//                var PlatformID:[Int] = []
+//                for Count in 0...(self.presenter?.ScrollList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
+//                    print(self.presenter?.ScrollList()[indexPath.item].platforms?[Count].platform?.name ?? "")
+//                    PlatformID.append(self.presenter?.ScrollList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
+//                }
+
                
 
              return cell
@@ -279,8 +252,8 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("hihihihihhihihihiihi")
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == ComingGamesCollection {
             return CGSize(width: 170, height: collectionView.frame.height)

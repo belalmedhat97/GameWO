@@ -17,23 +17,26 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
     private var popularlList:[Results] = []
     private var action:[ContextMenuAction] = []
     private var popularListOptions:[String] = ["name","released","added","created","rating"]
+    private var setOfFilters:Set<String> = ["name","-name","released","-released","added","-added","created","-created","updated","-updated","rating","-rating","metacritic","-metacritic"]
+
     init(view:MainHomeGamesViewProtocols) {
         self.view = view
+        
     }
     func handleViewDidLoadComing() {
         
-        self.view?.showLoading()
-        Network.Request(URL:GamesRouter.gamesListComing(dates: getDatePeriod(), page: "1", page_size: "100").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
+//        self.view?.showLoading()
+        Network.Request(URL:GamesRouter.gamesListComing(dates: getComingYear(), page: "1", page_size: "100").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
-                 print(response)
+//                 print(response)
                  self.comeList = response.results ?? []
-                    self.view?.hideLoading()
+//                    self.view?.hideLoading()
                     self.view?.reloadComingCollection()
                 
                 
              case .failure(let FailResponse):
-                    self.view?.hideLoading()
+//                    self.view?.hideLoading()
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
                 
                
@@ -43,31 +46,15 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
             }
         }
     }
-    func getDatePeriod() -> String{
-         let date = Date()
-         let formatter = DateFormatter()
-         formatter.dateFormat = "yyyy-MM-dd"
-         formatter.calendar = .current
-         formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
-         let StringCurrentYear = formatter.string(from: date)
-         print(StringCurrentYear)
-         let calendar = Calendar.current
-         let comingYear = calendar.component(.year, from: date)
-         
-         guard let ComingYearDate = Calendar.current.date(from: DateComponents(year: comingYear + 1, month: +1, day: +2)) else { return "" }
-             let comeYearDate = formatter.string(from: ComingYearDate)
-             print(comeYearDate)
-         return "\(StringCurrentYear),\(comeYearDate)"
-         
-     }
+
     func handleViewDidLoadPopular(showloader:Bool,pageSize:String,Page:String,ordering:String,completionHandler: @escaping ()->()?) {
         if showloader == true {
         self.view?.showLoading()
         }
-        Network.Request(URL:GamesRouter.gamesListOrdering(page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
+        Network.Request(URL:GamesRouter.gamesListOrdering(date: getPreviousYear(), page: Page, page_size: pageSize, ordering: setOfFilters.randomElement() ?? "").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
-                 print(response)
+//                 print(response)
                  if response.next != nil { self.view?.NextPage = true } else {self.view?.NextPage = false}
                  if response.previous != nil { self.view?.PreviousPage = true
                         self.view?.ChangeScrollCollectionBottom()
@@ -107,6 +94,34 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
         }
        
    
+    }
+private func getComingYear() -> String{
+         let date = Date()
+         let formatter = DateFormatter()
+         formatter.dateFormat = "yyyy-MM-dd"
+         formatter.calendar = .current
+         formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+         let stringCurrentYear = formatter.string(from: date)
+         let calendar = Calendar.current
+         let currentYear = calendar.component(.year, from: date)
+         guard let ComingYearDate = Calendar.current.date(from: DateComponents(year: currentYear + 1, month: +1, day: +2)) else { return "" }
+             let stringComingYear = formatter.string(from: ComingYearDate)
+         return "\(stringCurrentYear),\(stringComingYear)"
+         
+     }
+private func getPreviousYear() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.calendar = .current
+        formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        let calendar = Calendar.current
+
+        let currentYear = calendar.component(.year, from: date)
+
+        guard let previousYearDate = Calendar.current.date(from: DateComponents(year: currentYear - 1, month: +1, day: +2)) else { return "" }
+        let stringPreviousYear = formatter.string(from: previousYearDate)
+        return stringPreviousYear
     }
     
     

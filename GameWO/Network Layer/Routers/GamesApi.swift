@@ -12,7 +12,7 @@ enum GamesRouter:APIConfiguration{
         
     case gamesListComing(dates:String,page:String,page_size:String)
     case storesGames(storeId: String, page: String, page_size: String, ordering: String)
-    case gamesListOrdering(page:String,page_size:String,ordering:String)
+    case gamesListOrdering(date:String,page:String,page_size:String,ordering:String)
     case gamesGenreList(genreId: String, page: String, page_size: String, ordering: String)
     case gamesGenres
     case searchGames(Value:String)
@@ -22,14 +22,14 @@ enum GamesRouter:APIConfiguration{
     
     var method: HTTPMethod {
         switch self {
-        case .gamesListOrdering(_,_,_),.gamesListComing(_,_,_),.gamesGenres,.Screenshots(_),.Trailer(_),.gamesDetails(_),.searchGames(_),.gamesGenreList(_,_,_,_),.storesGames(_,_,_,_):
+        case .gamesListOrdering(_,_,_,_),.gamesListComing(_,_,_),.gamesGenres,.Screenshots(_),.Trailer(_),.gamesDetails(_),.searchGames(_),.gamesGenreList(_,_,_,_),.storesGames(_,_,_,_):
             return .get
         }
     }
     
     var path: String {
         switch self {
-        case .gamesListComing(_,_,_),.gamesListOrdering(_,_,_),.gamesGenreList(_,_,_,_):
+        case .gamesListComing(_,_,_),.gamesListOrdering(_,_,_,_),.gamesGenreList(_,_,_,_):
             return Endpoints.gamesList
         case .gamesGenres:
             return Endpoints.genres
@@ -50,8 +50,8 @@ enum GamesRouter:APIConfiguration{
         switch self {
         case .gamesListComing(let dates,let page,let page_size):
             return.url(["dates":dates,"page":page,"page_size":page_size])
-        case .gamesListOrdering(let page,let page_size,let ordering):
-            return.url(["page":page,"page_size":page_size,"ordering":ordering])
+        case .gamesListOrdering(let date,let page,let page_size,let ordering):
+            return.url(["dates":date,"page":page,"page_size":page_size,"ordering":ordering])
         case .gamesGenres,.Screenshots(_),.Trailer(_),.gamesDetails(_):
             return .NoParamter
         case .searchGames(let value):
@@ -59,13 +59,13 @@ enum GamesRouter:APIConfiguration{
         case .gamesGenreList(let Id,let page,let page_size,let ordering):
             return .url(["genres":Id,"page":page,"page_size":page_size,"ordering":ordering])
         case .storesGames(let storeId,let page,let page_size,let ordering):
-            return .url(["storeId":storeId,"page":page,"page_size":page_size,"ordering":ordering])
+            return .url(["stores":storeId,"page":page,"page_size":page_size,"ordering":ordering])
         }
     }
     
     var Headers: [String : Any]? {
         switch self {
-        case .gamesListComing(_,_,_),.gamesListOrdering(_,_,_),.gamesGenres,.Screenshots,.Trailer(_),.gamesDetails(_),.searchGames(_),.gamesGenreList(_,_,_,_),.storesGames(_,_,_,_):
+        case .gamesListComing(_,_,_),.gamesListOrdering(_,_,_,_),.gamesGenres,.Screenshots,.Trailer(_),.gamesDetails(_),.searchGames(_),.gamesGenreList(_,_,_,_),.storesGames(_,_,_,_):
             return .none
         }
     }
