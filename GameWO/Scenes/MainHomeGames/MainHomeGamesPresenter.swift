@@ -17,7 +17,6 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
     private var popularlList:[Results] = []
     private var action:[ContextMenuAction] = []
     private var popularListOptions:[String] = ["name","released","added","created","rating"]
-    private var setOfFilters:Set<String> = ["name","-name","released","-released","added","-added","created","-created","updated","-updated","rating","-rating","metacritic","-metacritic"]
 
     init(view:MainHomeGamesViewProtocols) {
         self.view = view
@@ -51,7 +50,7 @@ class MainHomeGamesPresenter:MainHomeGamesPresenterProtocols{
         if showloader == true {
         self.view?.showLoading()
         }
-        Network.Request(URL:GamesRouter.gamesListOrdering(date: getPreviousYear(), page: Page, page_size: pageSize, ordering: setOfFilters.randomElement() ?? "").urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
+        Network.Request(URL:GamesRouter.gamesListOrdering(date: getPreviousYear(), page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
 //                 print(response)

@@ -6,7 +6,6 @@
 //  Copyright © 2020 Belal medhat. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 @IBDesignable
