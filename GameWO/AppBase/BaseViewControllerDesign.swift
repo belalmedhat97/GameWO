@@ -69,7 +69,7 @@ extension BaseViewController{
                             NetworkErrorMessege2.leftAnchor.constraint(equalTo: self.NetworkView.leftAnchor, constant: 10),
                             NetworkErrorMessege2.rightAnchor.constraint(equalTo: self.NetworkView.rightAnchor, constant: -10),
                             NetworkErrorMessege2.heightAnchor.constraint(equalToConstant: 60),NetworkErrorMessege2.bottomAnchor.constraint(equalTo: NetworkView.bottomAnchor, constant: -30)])
-            HandImage.image = #imageLiteral(resourceName: "29_Hand with phone_01")
+            HandImage.image = UIImage(named: "PhoneInHand")
             HandImage.center = NetworkView.center
             HandImage.contentMode = .scaleAspectFit
             

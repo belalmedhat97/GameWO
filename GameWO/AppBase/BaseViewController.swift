@@ -26,7 +26,7 @@ class BaseViewController: UIViewController,BaseViewProtocol {
     let ViewCenter = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     let Indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), type: .circleStrokeSpin, color: #colorLiteral(red: 0.5401973128, green: 0.9296894073, blue: 0.6209766269, alpha: 1), padding: .some(100))
     var NetworkView = UIView()
-   private let monitor = NWPathMonitor()
+    private let monitor = NWPathMonitor()
 
   private let queue = DispatchQueue.global(qos: .background)
    
@@ -145,26 +145,27 @@ class BaseViewController: UIViewController,BaseViewProtocol {
       }
     
     func NetworkAvailability() {
+        let queue = DispatchQueue.global(qos: .background)
+
+        monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
             if path.status == .satisfied {
                 DispatchQueue.main.async {
                     self?.NetworkViewIntializer(show: false)
-
+            
                 }
                 print("We're connected!")
             } else {
                 DispatchQueue.main.async {
                     self?.NetworkViewIntializer(show: true)
-//                    self.showAlert(title: "", message: "There Is No Network Connection Please Open Wifi or cellular data")
+
                     print("No connection.")
                 }
                
             }
-        
-            print(path.isExpensive)
+            print(path.status)
         }
-        monitor.start(queue: queue)
-        
+     
       }
       
        
