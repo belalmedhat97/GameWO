@@ -11,17 +11,14 @@ import SDWebImage
 import SwiftyContextMenu
 import NVActivityIndicatorView
 class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
-
     
-    private let refreshControlView = UIRefreshControl() // object of refresh control
+    
     private let transition = StretchAnimator() // animation object
-    private var ReservedIDplatform:[Int] = [1,2,3,4,5,6,7,8]
-    var PaginationButton = UIButton()
-
     private var ComingCase:Bool? // variable to detect if present from scroll or coming collectionviews to make animations
-    var NextPage:Bool? // detect if there is next page in API
-    var PreviousPage:Bool? // detect if there is previous page in API
-    var StartPage:Int = 1 // first page of pagination
+    private var isPagniated:Bool = false
+    private var pagniationOption:String = ""
+    private var setOfFilters:Set<String> = ["name","-name","released","-released","added","-added","created","-created","updated","-updated","rating","-rating","metacritic","-metacritic"]
+    
     var presenter: MainHomeGamesPresenterProtocols?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,172 +26,160 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
         let spinner = UIActivityIndicatorView(style: .gray)
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
+        self.tabBarController?.delegate = self
         NextPage = false
         PreviousPage = false
-        self.ScrollGamesCollection.refreshControl = refreshControlView
-        self.refreshControlView.addTarget(self, action: #selector(RefeshCaller) , for: .valueChanged)
+        self.popularGamesCollection.refreshControl = refreshControlView
         self.presenter = MainHomeGamesPresenter(view:self)
         ComingGamesCollection.delegate = self
         ComingGamesCollection.dataSource = self
-        ScrollGamesCollection.delegate = self
-        ScrollGamesCollection.dataSource = self
+        popularGamesCollection.delegate = self
+        popularGamesCollection.dataSource = self
         self.presenter?.AddFilterData()
         ComingGamesCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
-        ScrollGamesCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
-
+        popularGamesCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
+        
         
         Filter.addContextMenu((self.presenter?.actionFilterList())!, for: .tap(numberOfTaps: 1))
         transition.dismissCompletion = { [weak self] in
             if self?.ComingCase == true {
-           guard let selectedIndexPathCell = self?.ComingGamesCollection.indexPathsForSelectedItems?[0],
-             let selectedCell = self?.ComingGamesCollection.cellForItem(at: selectedIndexPathCell)
-               as? ComingClassCell
-             else {
-               return
-           }
+                guard let selectedIndexPathCell = self?.ComingGamesCollection.indexPathsForSelectedItems?[0],
+                      let selectedCell = self?.ComingGamesCollection.cellForItem(at: selectedIndexPathCell)
+                        as? ComingClassCell
+                else {
+                    return
+                }
             }else{
-            guard let selectedIndexPathCell = self?.ScrollGamesCollection.indexPathsForSelectedItems?[0],
-                  let selectedCell = self?.ScrollGamesCollection.cellForItem(at: selectedIndexPathCell)
-                    as? ComingClassCell
-                  else {
+                guard let selectedIndexPathCell = self?.popularGamesCollection.indexPathsForSelectedItems?[0],
+                      let selectedCell = self?.popularGamesCollection.cellForItem(at: selectedIndexPathCell)
+                        as? ComingClassCell
+                else {
                     return
                 }
             }
-         }
-        addRefreshControl()
+        }
+        refreshControlView.addTarget(self, action: #selector(self.refreshContents), for: .valueChanged)
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.AnimateLogo(LogoView: Logo)
-      
         
-            self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(self.StartPage)", ordering:"", completionHandler:{})
+        if isPagniated == false {
+            pagniationOption = setOfFilters.randomElement() ?? ""
+            self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(self.StartPage)", ordering:pagniationOption, completionHandler:{})
             self.presenter?.handleViewDidLoadComing()
+            
+        }else{
+            self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(self.StartPage)", ordering:pagniationOption, completionHandler:{})
+            self.presenter?.handleViewDidLoadComing()
+            
+        }
         
-    
-
-
     }
     override func viewWillDisappear(_ animated: Bool) {
-          Logo.alpha = 0
-      }
+        Logo.alpha = 0
+    }
     override func viewDidDisappear(_ animated: Bool) {
         self.presenter?.ResetCollectionsList()
     }
-    // @@@@@ define the custom refresh indicator @@@@@ //
-       func addRefreshControl() {
-        
-           guard let customView = Bundle.main.loadNibNamed("CustomRefreshControl", owner: self, options: nil) else {
-               return
-           }
-           guard let refreshView = customView[0] as? UIView else {
-               return
-           }
-           refreshView.tag = 12052018
-            refreshView.frame = self.refreshControlView.bounds
-            self.refreshControlView.addSubview(refreshView)
-            self.refreshControlView.tintColor = UIColor.clear
-            self.refreshControlView.backgroundColor = UIColor.clear
-            self.refreshControlView.addTarget(self, action: #selector(self.refreshContents), for: .valueChanged)
-         
-       }
-
+    
+    
     @objc func refreshContents() {
-            
-            if self.NextPage == false {
+        if self.NextPage == false {
             self.showAlert(title: "", message: "There is no other pages")
         }else{
             let refreshView = self.refreshControlView.viewWithTag(12052018)
-                   for vw in (refreshView?.subviews)! {
-                           if let indicator = vw as? NVActivityIndicatorView {
-                             indicator.startAnimating()
-                           }
-                   }
+            for vw in (refreshView?.subviews)! {
+                if let indicator = vw as? NVActivityIndicatorView {
+                    indicator.startAnimating()
+                }
+            }
             self.perform(#selector(self.ForwardPagination), with: nil, afterDelay: 1.5)
         }
-        }
-
-     
-     @objc func ForwardPagination() {
+    }
+    
+    
+    @objc func ForwardPagination() {
         StartPage+=1
-        self.presenter?.handleViewDidLoadPopular(showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: ""){ // go next pagination
-        let refreshView = self.refreshControlView.viewWithTag(12052018)
-        for vw in (refreshView?.subviews)! {
-            if let indicator = vw as? NVActivityIndicatorView {
-                indicator.stopAnimating()
+        self.presenter?.handleViewDidLoadPopular(showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: pagniationOption){ // go next pagination
+            let refreshView = self.refreshControlView.viewWithTag(12052018)
+            for vw in (refreshView?.subviews)! {
+                if let indicator = vw as? NVActivityIndicatorView {
+                    indicator.stopAnimating()
+                }
             }
-        }
             self.refreshControlView.endRefreshing()
             return ()
         }
-     }
+    }
     @objc func BackPagination(){ // go back pagination
         StartPage-=1
-        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: "", completionHandler: {})
+        self.presenter?.handleViewDidLoadPopular(showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: pagniationOption, completionHandler: {})
     }
     func ChangeScrollCollectionBottom() { // change bottom constraints and add back pagination buttom
         if PreviousPage == false {
             UIView.animate(withDuration: 1) {
-            self.ScrollBottomConstraints.constant = 0
+                self.ScrollBottomConstraints.constant = 0
                 self.PaginationButton.removeFromSuperview()
             }
         }else{
-                
             
-        UIView.animate(withDuration: 1) {
-            self.ScrollBottomConstraints.constant = 50
-            self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination"), for: .normal)
-            self.PaginationButton.addTarget(self, action: #selector(self.BackPagination), for: .touchUpInside)
-            self.view.addSubview(self.PaginationButton)
-            self.PaginationButton.translatesAutoresizingMaskIntoConstraints = false
-            self.PaginationButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-            self.PaginationButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            self.PaginationButton.topAnchor.constraint(equalToSystemSpacingBelow: self.ScrollGamesCollection.bottomAnchor, multiplier: 1).isActive = true
-            self.PaginationButton.centerXAnchor.constraint(equalTo: self.ScrollGamesCollection.centerXAnchor).isActive = true
-
-        
+            
+            UIView.animate(withDuration: 1) {
+                self.ScrollBottomConstraints.constant = 50
+                self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination"), for: .normal)
+                self.PaginationButton.addTarget(self, action: #selector(self.BackPagination), for: .touchUpInside)
+                self.view.addSubview(self.PaginationButton)
+                self.PaginationButton.translatesAutoresizingMaskIntoConstraints = false
+                self.PaginationButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+                self.PaginationButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+                self.PaginationButton.topAnchor.constraint(equalToSystemSpacingBelow: self.popularGamesCollection.bottomAnchor, multiplier: 1).isActive = true
+                self.PaginationButton.centerXAnchor.constraint(equalTo: self.popularGamesCollection.centerXAnchor).isActive = true
+                
+                
             }
         }
     }
-      
+    
     @IBOutlet weak var Logo: UIImageView!
     @IBOutlet weak var ScrollBottomConstraints: NSLayoutConstraint!
     @IBOutlet weak var ComingGamesCollection: UICollectionView!
-    @IBOutlet weak var ScrollGamesCollection: UICollectionView!
+    @IBOutlet weak var popularGamesCollection: UICollectionView!
     @IBOutlet weak var Filter: UIButton!
     @objc func RefeshCaller(){
         print("dawdawdawddadadawdwad")
     }
-   
-  
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func reloadComingCollection() {
         ComingGamesCollection.reloadData()
     }
     
     func reloadPopularCollection() {
         if NextPage == true && PreviousPage == true {
-            ScrollGamesCollection.reloadData()
-                       let lastItemIndex = NSIndexPath(item: 0, section: 0)
-                       self.ScrollGamesCollection.scrollToItem(at: lastItemIndex as IndexPath, at: .top, animated: true)
+            popularGamesCollection.reloadData()
+            let lastItemIndex = NSIndexPath(item: 0, section: 0)
+            self.popularGamesCollection.scrollToItem(at: lastItemIndex as IndexPath, at: .top, animated: true)
             
-       
+            
             
         }else{
-            ScrollGamesCollection.reloadData()
-
+            popularGamesCollection.reloadData()
+            
         }
     }
-           
+    
 }
 extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -206,51 +191,47 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            if collectionView == ComingGamesCollection {
+        if collectionView == ComingGamesCollection {
             guard self.presenter?.ComingList().count != 0 else { // check if data exists
-                        let cell = ComingGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
-                       return cell}
-                
+                let cell = ComingGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
+                return cell}
+            
             let cell = ComingGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
             cell.layer.masksToBounds = false
             cell.clipsToBounds = true
-                
-            cell.GameImage.sd_imageIndicator = IndicatorColor()
-//                cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name
+            
+            if self.presenter?.ComingList()[indexPath.item].background_image ?? "" != "" {
+                cell.GameImage.sd_imageIndicator = IndicatorColor()
                 cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ComingList()[indexPath.item].background_image ?? ""), completed: nil)
-                cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name ?? "No Name"
-                guard self.presenter?.ComingList()[indexPath.item].parent_platforms != nil else {
 
-                    return cell}
-//                var PlatformID:[Int] = []
-//                for Count in 0...(self.presenter?.ComingList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
-////                    print(self.presenter?.ComingList()[indexPath.item].platforms?[Count].platform?.name ?? "")
-//                    PlatformID.append(self.presenter?.ComingList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
-//                }
-
+            } else {
+                cell.GameImage.image = #imageLiteral(resourceName: "NoImage")
+            }
+            cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name ?? "No Name"
+            guard self.presenter?.ComingList()[indexPath.item].parent_platforms != nil else {
+                
+                return cell}
+            
+            
             return cell
-         }else{
-             let cell = ScrollGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
-
+        }else{
+            let cell = popularGamesCollection.dequeueReusableCell(withReuseIdentifier: customCells.ComingClassCell, for: indexPath) as! ComingClassCell
+            
             cell.clipsToBounds = true
-//            cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name
-            cell.GameImage.sd_imageIndicator = IndicatorColor()
-            cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ScrollList()[indexPath.item].background_image ?? ""), completed: nil)
-                cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name ?? "No Name"
+            if self.presenter?.ScrollList()[indexPath.item].background_image ?? "" != "" {
+                cell.GameImage.sd_imageIndicator = IndicatorColor()
+                cell.GameImage.sd_setImage(with: URL(string: self.presenter?.ScrollList()[indexPath.item].background_image ?? ""), completed: nil)
 
-
-//                var PlatformID:[Int] = []
-//                for Count in 0...(self.presenter?.ScrollList()[indexPath.item].parent_platforms?.count ?? 0) - 1 {
-//                    print(self.presenter?.ScrollList()[indexPath.item].platforms?[Count].platform?.name ?? "")
-//                    PlatformID.append(self.presenter?.ScrollList()[indexPath.item].parent_platforms?[Count].platform?.id ?? 0)
-//                }
-
-               
-
-             return cell
-         }
+            } else {
+                cell.GameImage.image = #imageLiteral(resourceName: "NoImage")
+            }
+            cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name ?? "No Name"
+            
+            
+            return cell
+        }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     }
     
@@ -259,7 +240,7 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
             return CGSize(width: 170, height: collectionView.frame.height)
         }else {
             return CGSize(width: collectionView.frame.width/2 - 10, height:170)
-
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -267,9 +248,9 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
             return 10
         }else {
             return 10
-
+            
         }
-
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -278,34 +259,45 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
         if collectionView == ComingGamesCollection {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }else{
-           return UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
-
+            return UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == ComingGamesCollection {
-        if let cell = ComingGamesCollection.cellForItem(at: indexPath) as? ComingClassCell {
-            
-            let storyboard = UIStoryboard(name: Storyboards.Home, bundle: nil)
-                   let vc = storyboard.instantiateViewController(withIdentifier: "DetailsVC") as! DetailsVC
-                    vc.SingleImage = cell.GameImage.image
-
-            vc.Id = "\(self.presenter?.ComingList()[indexPath.item].id ?? 0)"
-            self.navigationController?.pushViewController(vc, animated: true)
-
-            
-        }
-        }else{
-            if let cell = ScrollGamesCollection.cellForItem(at: indexPath) as? ComingClassCell {
-               let storyboard = UIStoryboard(name: Storyboards.Home, bundle: nil)
+            if let cell = ComingGamesCollection.cellForItem(at: indexPath) as? ComingClassCell {
+                
+                let storyboard = UIStoryboard(name: Storyboards.Home, bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "DetailsVC") as! DetailsVC
                 vc.SingleImage = cell.GameImage.image
+                isPagniated = true
+                vc.Id = "\(self.presenter?.ComingList()[indexPath.item].id ?? 0)"
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+                
+            }
+        }else{
+            if let cell = popularGamesCollection.cellForItem(at: indexPath) as? ComingClassCell {
+                let storyboard = UIStoryboard(name: Storyboards.Home, bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "DetailsVC") as! DetailsVC
+                vc.SingleImage = cell.GameImage.image
+                isPagniated = true
                 vc.Id = "\(self.presenter?.ScrollList()[indexPath.item].id ?? 0)"
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             }
         }
-          }
-
     }
+    
+}
+    extension MainHomeGamesVC:UITabBarControllerDelegate{
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+           let tabBarIndex = tabBarController.selectedIndex
+           if tabBarIndex != 0 {
+               //do your stuff
+            isPagniated = false
+           }
+      }
+}

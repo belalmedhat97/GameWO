@@ -7,24 +7,32 @@
 //
 
 import UIKit
-
+import NVActivityIndicatorView
 class GenreSelectedVC: BaseViewController,GenreSelectedViewProtocols {
   
-    var NextPage:Bool?
-    var PreviousPage:Bool?
-    func ChangeScrollCollectionBottom(){print("dwadaw")}
     var presenter: GenreSelectedPresenterProtocols?
     var ID:String?
     var Title: String?
+    private let transition = StretchAnimator() // animation object
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = GenreSelectedPresenter(view: self)
+        let spinner = UIActivityIndicatorView(style: .gray)
+                   spinner.color = UIColor.darkGray
+                   spinner.hidesWhenStopped = true
+
+                   NextPage = false
+                   PreviousPage = false
+                   self.GenreCollection.refreshControl = refreshControlView
         // Do any additional setup after loading the view.
         GenreCollection.delegate = self
         GenreCollection.dataSource = self
             GenreCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
         self.presenter?.handleViewDidLoadGenre(Genre: ID ?? "", showloader: true, pageSize: "20", Page: "1", ordering: "", completionHandler: {})
         self.GenreTitle.text = Title
+        refreshControlView.addTarget(self, action: #selector(refreshContents), for: .valueChanged)
+
     }
     
     @IBOutlet weak var Logo: UIImageView!
@@ -38,6 +46,62 @@ class GenreSelectedVC: BaseViewController,GenreSelectedViewProtocols {
     func reloadGenreCollection() {
         self.GenreCollection.reloadData()
      }
+    @objc  func refreshContents() {
+          if NextPage == false {
+              self.showAlert(title: "", message: "There is no other pages")
+          }else{
+              let refreshView = refreshControlView.viewWithTag(12052018)
+                     for vw in (refreshView?.subviews)! {
+                             if let indicator = vw as? NVActivityIndicatorView {
+                               indicator.startAnimating()
+                             }
+                     }
+              self.perform(#selector(self.ForwardPagination), with: nil, afterDelay: 1.5)
+          }
+
+
+         }
+       @objc func ForwardPagination() {
+          StartPage+=1
+          self.presenter?.handleViewDidLoadGenre(Genre: ID ?? "", showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: ""){ // go next pagination
+          let refreshView = self.refreshControlView.viewWithTag(12052018)
+          for vw in (refreshView?.subviews)! {
+              if let indicator = vw as? NVActivityIndicatorView {
+                  indicator.stopAnimating()
+              }
+          }
+              self.refreshControlView.endRefreshing()
+              return ()
+          }
+       }
+      @objc func BackPagination(){ // go back pagination
+          StartPage-=1
+          self.presenter?.handleViewDidLoadGenre(Genre: ID ?? "", showloader: true, pageSize: "20", Page: "\(StartPage)", ordering: "", completionHandler: {})
+      }
+      func ChangeScrollCollectionBottom() { // change bottom constraints and add back pagination buttom
+          if PreviousPage == false {
+              UIView.animate(withDuration: 1) {
+              self.GenreCollectionBottomConstraints.constant = 0
+                  self.PaginationButton.removeFromSuperview()
+              }
+          }else{
+          UIView.animate(withDuration: 1) {
+              self.GenreCollectionBottomConstraints.constant = 50
+              self.PaginationButton.setImage(#imageLiteral(resourceName: "Pagination"), for: .normal)
+              self.PaginationButton.addTarget(self, action: #selector(self.BackPagination), for: .touchUpInside)
+              self.view.addSubview(self.PaginationButton)
+              self.PaginationButton.translatesAutoresizingMaskIntoConstraints = false
+              self.PaginationButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+              self.PaginationButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+              self.PaginationButton.topAnchor.constraint(equalToSystemSpacingBelow: self.GenreCollection.bottomAnchor, multiplier: 1).isActive = true
+              self.PaginationButton.centerXAnchor.constraint(equalTo: self.GenreCollection.centerXAnchor).isActive = true
+
+          }
+          }
+      }
+
+
+    @IBOutlet weak var GenreCollectionBottomConstraints: NSLayoutConstraint!
     /*
     // MARK: - Navigation
 

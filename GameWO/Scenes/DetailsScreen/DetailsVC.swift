@@ -94,9 +94,9 @@ class DetailsVC: BaseViewController,DetailsVCViewProtocols {
  
     func reloadVCDetails(Details: GameDetailsResponse) {
         print(Details.added ?? 0)
-        GameName.text = Details.name
-        DescriptionData.text = Details.descriptionRaw
-        print(Details.platforms ?? "")
+        GameName.text = Details.name ?? "NO NAME FOUND"
+        DescriptionData.text = Details.descriptionRaw ?? "NO DESCRIPTION FOUND"
+        print(Details.platforms ?? "NO PLATFORM FOUND")
         rate.rating = Double(Details.rating ?? 0.0)
         RateNumber.text = "\(Details.rating ?? 0.0)"
         
@@ -157,7 +157,7 @@ extension DetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollec
         if collectionView == TrailerCollection {
         return CGSize(width: collectionView.frame.width - 100, height:collectionView.frame.height - 20)
         }else if collectionView == ScreenShotCollection {
-        return CGSize(width: collectionView.frame.width - 20, height:collectionView.frame.height - 20)
+        return CGSize(width: collectionView.frame.width - 20, height:collectionView.frame.height - 30)
 
         }else if collectionView == PlatformCollection{
             

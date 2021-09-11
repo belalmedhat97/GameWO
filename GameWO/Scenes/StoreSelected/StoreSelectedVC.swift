@@ -11,16 +11,11 @@ import NVActivityIndicatorView
 class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
     
 
-    var presenter: StoreSelectedPresenterProtocols?
-       private let refreshControlView = UIRefreshControl() // object of refresh control
+        var presenter: StoreSelectedPresenterProtocols?
         private let transition = StretchAnimator() // animation object
-        var PaginationButton = UIButton()
         private var ComingCase:Bool? // variable to detect if present from scroll or coming collectionviews to make animations
-        var NextPage:Bool? // detect if there is next page in API
-        var PreviousPage:Bool? // detect if there is previous page in API
-        var StartPage:Int = 1 // first page of pagination
-    var ID:String?
-    var Title: String?
+        var ID:String?
+        var Title: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         Logo.alpha = 0
@@ -35,10 +30,11 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
         // Do any additional setup after loading the view.
         StoreCollection.delegate = self
         StoreCollection.dataSource = self
-            StoreCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
-      addRefreshControl()
+        StoreCollection.register(UINib(nibName: customCellsView.ComingViewCell, bundle: nil), forCellWithReuseIdentifier: customCells.ComingClassCell)
 
         self.GenreTitle.text = Title
+        refreshControlView.addTarget(self, action: #selector(refreshContents), for: .valueChanged)
+
     }
     override func viewWillAppear(_ animated: Bool) {
     self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: true, pageSize: "20", Page: "1", ordering: "-added", completionHandler: {})
@@ -58,24 +54,8 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
     func reloadStoreCollection() {
         self.StoreCollection.reloadData()
      }
-    // @@@@@ define the custom refresh indicator @@@@@ //
-         func addRefreshControl() {
-             guard let customView = Bundle.main.loadNibNamed("CustomRefreshControl", owner: self, options: nil) else {
-                 return
-             }
-             guard let refreshView = customView[0] as? UIView else {
-                 return
-             }
-             refreshView.tag = 12052018
-             refreshView.frame = refreshControlView.bounds
-             refreshControlView.addSubview(refreshView)
-             refreshControlView.tintColor = UIColor.clear
-             refreshControlView.backgroundColor = UIColor.clear
-             refreshControlView.addTarget(self, action: #selector(refreshContents), for: .valueChanged)
-           
-         }
 
-      @objc func refreshContents() {
+    @objc  func refreshContents() {
           if NextPage == false {
               self.showAlert(title: "", message: "There is no other pages")
           }else{
@@ -90,7 +70,6 @@ class StoreSelectedVC: BaseViewController,StoreSelectedViewProtocols {
 
 
          }
-       
        @objc func ForwardPagination() {
           StartPage+=1
           self.presenter?.handleViewDidLoadStore(StoreID: ID ?? "0", showloader: false, pageSize: "20", Page: "\(StartPage)", ordering: "-added"){ // go next pagination

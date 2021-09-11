@@ -14,7 +14,12 @@ class BaseViewController: UIViewController,BaseViewProtocol {
 
     
 
-    
+     let refreshControlView = UIRefreshControl() // object of refresh control
+     var NextPage:Bool? // detect if there is next page in API
+     var PreviousPage:Bool? // detect if there is previous page in API
+     var StartPage:Int = 1 // first page of pagination
+     var PaginationButton = UIButton()
+
      let radarAnimation = "radarAnimation"
      var animationLayer: CALayer?
      var animationGroup: CAAnimationGroup?
@@ -34,6 +39,7 @@ class BaseViewController: UIViewController,BaseViewProtocol {
         NetworkAvailability()
         // to get notifcation when user foreground to the app
         NotificationCenter.default.addObserver(self, selector: #selector(checknetwork), name: Notification.Name("userReturnBack"), object: nil)
+        addRefreshControl()
 
     }
   
@@ -70,6 +76,41 @@ class BaseViewController: UIViewController,BaseViewProtocol {
             ""
         }
     }
+    
+    // @@@@@ define the custom refresh indicator @@@@@ //
+
+    func addRefreshControl() {
+     
+        guard let customView = Bundle.main.loadNibNamed("CustomRefreshControl", owner: self, options: nil) else {
+            return
+        }
+        guard let refreshView = customView[0] as? UIView else {
+            return
+        }
+         refreshView.tag = 12052018
+         refreshView.frame = refreshControlView.bounds
+        refreshControlView.addSubview(refreshView)
+        refreshControlView.tintColor = UIColor.clear
+        refreshControlView.backgroundColor = UIColor.clear
+      
+    }
+//    @objc func refreshContents() {
+//
+//            if NextPage == false {
+//            self.showAlert(title: "", message: "There is no other pages")
+//        }else{
+//            let refreshView = refreshControlView.viewWithTag(12052018)
+//                   for vw in (refreshView?.subviews)! {
+//                           if let indicator = vw as? NVActivityIndicatorView {
+//                             indicator.startAnimating()
+//                           }
+//                   }
+////            self.perform(#selector(self.ForwardPagination), with: nil, afterDelay: 1.5)
+//        }
+//        }
+    
+    
+
     func showLoading() {
         DispatchQueue.main.async {
             self.Loader(removeFromView: false)
