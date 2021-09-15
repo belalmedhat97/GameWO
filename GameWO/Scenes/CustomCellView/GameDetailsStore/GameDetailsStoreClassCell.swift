@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class GameDetailsStoreClassCell: UICollectionViewCell {
 
     override func awakeFromNib() {
@@ -16,7 +15,7 @@ class GameDetailsStoreClassCell: UICollectionViewCell {
         StoreImage.clipsToBounds = true
        StoreImage.cornerRadius = StoreImage.layer.frame.width/2
     }
-    private var StoresImagesDic:[Int:UIImage] = [1:#imageLiteral(resourceName: "Steam"),2:#imageLiteral(resourceName: "Xbox"),3:#imageLiteral(resourceName: "Playstation"),4:#imageLiteral(resourceName: "appstore"),5:#imageLiteral(resourceName: "gog"),6:#imageLiteral(resourceName: "Nintendo"),7:#imageLiteral(resourceName: "Xbox"),8:#imageLiteral(resourceName: "GooglePlay"),9:#imageLiteral(resourceName: "itch"),11:#imageLiteral(resourceName: "epicgames")]
+    private var StoresImagesDic:[Int:UIImage] = [1:#imageLiteral(resourceName: "Steam"),2:#imageLiteral(resourceName: "Xbox"),3:#imageLiteral(resourceName: "Playstation"),4:#imageLiteral(resourceName: "appstore"),5:#imageLiteral(resourceName: "gog"),6:#imageLiteral(resourceName: "nitindo"),7:#imageLiteral(resourceName: "Xbox"),8:#imageLiteral(resourceName: "GooglePlay"),9:#imageLiteral(resourceName: "itch"),11:#imageLiteral(resourceName: "epicgames")]
     
     @IBOutlet weak var StoreImage: UIImageView!
     
