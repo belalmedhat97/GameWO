@@ -73,7 +73,7 @@ class BaseViewController: UIViewController,BaseViewProtocol {
         case .light:
              self.view?.backgroundColor = UIColor.init(named: "BackGroundApp")
         default:
-            ""
+            print("")
         }
     }
     
