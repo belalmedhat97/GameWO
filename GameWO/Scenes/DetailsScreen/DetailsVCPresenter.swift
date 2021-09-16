@@ -27,7 +27,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
         Network.Request(URL:GamesRouter.gamesDetails(id: id).urlRequest) { (result:CustomResults<GameDetailsResponse,GameErrorResponse, Error>) in
                 switch result {
                 case .success(let response):
-                print(response)
+//                print(response)
                 self.details = response
                         self.view?.hideLoading()
                         if let gameDetails = self.details {
@@ -43,7 +43,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                 case .failure(let FailResponse):
                         self.view?.hideLoading()
                         self.view?.showAlert(title: "", message: FailResponse.error ?? "")
-                        print(FailResponse)
+//                        print(FailResponse)
 //
                 case .failureError(let error):
                     print(error)
@@ -57,7 +57,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
         Network.Request(URL:GamesRouter.Screenshots(id: id).urlRequest) { (result:CustomResults<ScreenShots,GameErrorResponse, Error>) in
                 switch result {
                 case .success(let response):
-                print(response)
+//                print(response)
                 self.Screens = response.results ?? []
                         self.view?.hideLoading()
                         self.view?.reloadScreenshots()
@@ -68,7 +68,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                         self.view?.showAlert(title: "", message: FailResponse.error ?? "")
 
 //
-                print(FailResponse)
+//                print(FailResponse)
                 case .failureError(let error):
                     print(error)
                 }
@@ -81,7 +81,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
         Network.Request(URL:GamesRouter.Trailer(id: id).urlRequest) { (result:CustomResults<TrailerResponse,GameErrorResponse ,Error>) in
                    switch result {
                    case .success(let response):
-                   print(response)
+//                   print(response)
                         if response.results?.count == 0 {
                          self.view?.removeTrailerCollection()
                         }else
@@ -97,7 +97,7 @@ class DetailsVCPresenter:DetailsVCPresenterProtocols{
                         self.view?.showAlert(title: "", message: FailResponse.error ?? "")
                     
                 
-                   print(FailResponse)
+//                   print(FailResponse)
                    case .failureError(let error):
                     print(error)
                    }

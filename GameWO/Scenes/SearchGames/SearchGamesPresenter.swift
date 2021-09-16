@@ -18,7 +18,7 @@ class SearchGamesPresenter:SearchGamesPresenterProtocols{
         Network.Request(URL:GamesRouter.searchGames(Value: searchValue).urlRequest) { (Result:CustomResults<GameListResposne,GameErrorResponse ,Error>) in
             switch Result {
             case .success(let response):
-            print(response)
+//            print(response)
                     if response.results?.count == 0 {
                         self.view?.showError(show:true)
                     }else{
@@ -35,7 +35,7 @@ class SearchGamesPresenter:SearchGamesPresenterProtocols{
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
                 
            
-            print(FailResponse)
+//            print(FailResponse)
                 
             case .failureError(let error):
                 print(error)

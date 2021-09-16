@@ -15,7 +15,7 @@ extension DetailsVC {
             self.UIimageViewer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.screenimage = UIImageView(frame: CGRect(x: self.UIimageViewer.frame.minX, y: self.UIimageViewer.frame.minY, width: self.UIimageViewer.frame.width, height: self.UIimageViewer.frame.height))
             self.screenimage.sd_setImage(with: URL(string: image), completed: nil)
-            self.screenimage.contentMode = .scaleAspectFit
+        self.screenimage.contentMode = .scaleToFill
             self.CloseButton.setTitle("CLOSE", for: .normal)
             self.CloseButton.setTitleColor(#colorLiteral(red: 0.5401973128, green: 0.9296894073, blue: 0.6209766269, alpha: 1), for: .normal)
             self.CloseButton.borderWidth = 0.5

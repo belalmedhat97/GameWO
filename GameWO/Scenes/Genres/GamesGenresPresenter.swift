@@ -20,7 +20,7 @@ class GamesGenresPresenter:GamesGenresPresenterProtocols{
         Network.Request(URL:GamesRouter.gamesGenres.urlRequest) { (result:CustomResults<GameGenresResponse,GameErrorResponse, Error>) in
             switch result {
             case .success(let response):
-            print(response)
+//            print(response)
             self.Genre = response.results ?? []
                     self.view?.hideLoading()
                     self.view?.reloadGenreCollection()
@@ -32,7 +32,7 @@ class GamesGenresPresenter:GamesGenresPresenterProtocols{
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
                 
          
-                print(FailResponse.error ?? "")
+//                print(FailResponse.error ?? "")
             case .failureError(let error):
                 print(error)
             }

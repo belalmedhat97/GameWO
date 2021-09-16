@@ -9,7 +9,6 @@ import SDWebImage
 protocol BaseViewProtocol: AnyObject {    
     func showLoading()
     func hideLoading()
-    func showScreenNoConnection()
     func showAlert(title: String?, message: String)
     func SystemModeCheck()
     func NetworkAvailability()
