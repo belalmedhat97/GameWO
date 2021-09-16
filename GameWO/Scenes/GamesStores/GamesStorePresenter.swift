@@ -19,7 +19,7 @@ class GameStorePresenter:GamesStorePresenterProtocol{
         Network.Request(URL: StoreRouter.storeList.urlRequest) { (result:CustomResults<GamesStoreResponse,GameErrorResponse, Error>) in
             switch result {
             case .success(let response):
-            print(response)
+//            print(response)
             self.Stores = response.results ?? []
                     self.view?.hideLoading()
                     self.view?.reloadStoreCollection()
@@ -30,7 +30,7 @@ class GameStorePresenter:GamesStorePresenterProtocol{
                     self.view?.showAlert(title: "", message: FailResponse.error ?? "")
                 
             
-            print(FailResponse)
+//            print(FailResponse)
             case .failureError(let error):
                 print(error)
             }

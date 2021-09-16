@@ -148,9 +148,7 @@ class MainHomeGamesVC: BaseViewController,MainHomeGamesViewProtocols {
     @IBOutlet weak var ComingGamesCollection: UICollectionView!
     @IBOutlet weak var popularGamesCollection: UICollectionView!
     @IBOutlet weak var Filter: UIButton!
-    @objc func RefeshCaller(){
-        print("dawdawdawddadadawdwad")
-    }
+    
     
     
     /*
@@ -206,6 +204,8 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
 
             } else {
                 cell.GameImage.image = #imageLiteral(resourceName: "NoImage")
+                cell.GameImage.contentMode = .scaleAspectFit
+                
             }
             cell.GameName.text = self.presenter?.ComingList()[indexPath.item].name ?? "No Name"
             guard self.presenter?.ComingList()[indexPath.item].parent_platforms != nil else {
@@ -224,6 +224,8 @@ extension MainHomeGamesVC:UICollectionViewDelegate,UICollectionViewDataSource,UI
 
             } else {
                 cell.GameImage.image = #imageLiteral(resourceName: "NoImage")
+                cell.GameImage.contentMode = .scaleAspectFit
+
             }
             cell.GameName.text = self.presenter?.ScrollList()[indexPath.item].name ?? "No Name"
             

@@ -22,7 +22,7 @@ class StoreSelectedPresenter:StoreSelectedPresenterProtocols{
         Network.Request(URL: GamesRouter.storesGames(storeId: StoreID, page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
-                 print(response)
+//                 print(response)
                  if response.next != nil { self.view?.NextPage = true } else {self.view?.NextPage = false}
                  if response.previous != nil { self.view?.PreviousPage = true
                     self.view?.ChangeScrollCollectionBottom()
@@ -37,7 +37,7 @@ class StoreSelectedPresenter:StoreSelectedPresenterProtocols{
                 completionHandler()
              case .failure(let failResponse):
                 self.view?.showAlert(title: "", message: failResponse.error ?? "")
-                 print(failResponse.error ?? "")
+//                 print(failResponse.error ?? "")
                 completionHandler()
             case .failureError(let error):
                 print(error)

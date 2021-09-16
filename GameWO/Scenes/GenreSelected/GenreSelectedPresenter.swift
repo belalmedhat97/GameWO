@@ -24,7 +24,7 @@ class GenreSelectedPresenter:GenreSelectedPresenterProtocols{
         Network.Request(URL:GamesRouter.gamesGenreList(genreId: Genre, page: Page, page_size: pageSize, ordering: ordering).urlRequest) { (result:CustomResults<GameListResposne,GameErrorResponse,Error>) in
             switch result{
              case .success(let response):
-                 print(response)
+//                 print(response)
                  if response.next != nil { self.view?.NextPage = true } else {self.view?.NextPage = false}
                  if response.previous != nil { self.view?.PreviousPage = true
                     self.view?.ChangeScrollCollectionBottom()
@@ -39,7 +39,7 @@ class GenreSelectedPresenter:GenreSelectedPresenterProtocols{
                 completionHandler()
              case .failure(let FailReponse):
                 self.view?.showAlert(title: "", message: FailReponse.error ?? "")
-                 print(FailReponse)
+//                 print(FailReponse)
                 completionHandler()
             case .failureError(let error):
                 print(error)

@@ -94,7 +94,6 @@ class DetailsVC: BaseViewController,DetailsVCViewProtocols {
     
     
     func reloadVCDetails(Details: GameDetailsResponse) {
-        print(Details.added ?? 0)
         if Details.name == "" {
             GameName.text = "NO NAME FOUND"
             
@@ -108,7 +107,6 @@ class DetailsVC: BaseViewController,DetailsVCViewProtocols {
             DescriptionData.text = Details.descriptionRaw ?? "NO DESCRIPTION FOUND"
             
         }
-        print(Details.platforms ?? "NO PLATFORM FOUND")
         rate.rating = Double(Details.rating ?? 0.0)
         RateNumber.text = "\(Details.rating ?? 0.0)"
         
@@ -129,7 +127,6 @@ class DetailsVC: BaseViewController,DetailsVCViewProtocols {
 extension DetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == TrailerCollection {
-            print(self.presenter?.TrailerList().count ?? 0)
             return self.presenter?.TrailerList().count ?? 0
         }else if collectionView == ScreenShotCollection {
             return self.presenter?.ScreenshotsLists().count ?? 0
@@ -144,7 +141,6 @@ extension DetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollec
         if collectionView == TrailerCollection {
             let cell = TrailerCollection.dequeueReusableCell(withReuseIdentifier: "TrailerClassCell", for: indexPath) as! TrailerClassCell
             let indexPath2 = self.TrailerCollection.indexPathForItem(at: self.TrailerCollection.center)
-            print(indexPath2 ?? 0)
             cell.AddVideo(TrailerUrl: self.presenter?.TrailerList()[indexPath.item].data?.R480 ?? self.presenter?.TrailerList()[indexPath.item].data?.max ?? "")
             return cell
         }else if collectionView == ScreenShotCollection{
@@ -230,7 +226,6 @@ extension DetailsVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollec
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == StoresCollection {
-            print(self.presenter?.Stores()[indexPath.item].url ?? "")
             if let url = URL(string: self.presenter?.Stores()[indexPath.item].url ?? "") {
                 UIApplication.shared.open(url)
                 

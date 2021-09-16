@@ -169,10 +169,7 @@ class BaseViewController: UIViewController,BaseViewProtocol {
       }
       
        
-       func showScreenNoConnection() {
-           print("")
-
-       }
+ 
        
     func showAlert(title: String?, message: String) {
         DispatchQueue.main.async {

@@ -1064,7 +1064,7 @@
         <image name="Filter" width="20" height="20"/>
         <image name="Home" width="50" height="50"/>
         <image name="error" width="814" height="299"/>
-        <image name="logo" width="179.5" height="179.5"/>
+        <image name="logo" width="200" height="200"/>
         <image name="search" width="25" height="25"/>
         <namedColor name="AppTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
