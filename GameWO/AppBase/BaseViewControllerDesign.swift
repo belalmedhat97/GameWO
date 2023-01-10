@@ -60,7 +60,7 @@ extension BaseViewController{
             NetworkErrorMessege2.numberOfLines = 0
             NetworkErrorMessege2.font.withSize(40)
             NetworkErrorMessege2.textAlignment = .center
-            NetworkErrorMessege2.text = "Seemed To Be No Internet Acess Check Your Wifi or Cellular Connection And Try Again"
+            NetworkErrorMessege2.text = "No Internet Acess Check Your Wifi or Cellular Connection And Try Again"
             NetworkView.addSubview(NetworkErrorMessege2)
             NetworkErrorMessege2.translatesAutoresizingMaskIntoConstraints = false
                        NSLayoutConstraint.activate(

@@ -22,6 +22,7 @@ class StartScreenVC: BaseViewController {
     @IBAction func StartButton(_ sender: Any) {
         let vc = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "HomeRootNC")
         vc.modalPresentationStyle = .fullScreen
+        hideScreenSecondLaunch()
         self.present(vc, animated: true, completion: nil)
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -45,6 +46,8 @@ class StartScreenVC: BaseViewController {
         @objc func playeritemDidReachEnd(){
         player!.seek(to: CMTime.zero)
         }
-
+    func hideScreenSecondLaunch(){
+        UserDefaults.standard.set(true, forKey: LaunchScreenCase.status)
+    }
 }
 

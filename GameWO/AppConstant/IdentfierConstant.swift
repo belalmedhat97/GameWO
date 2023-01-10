@@ -33,3 +33,6 @@ struct customCellsView {
 struct RefreshCustomView {
     static let RefreshFooterView = "RefreshFooterView"
 }
+struct LaunchScreenCase {
+    static let status = "LaunchStatus"
+}

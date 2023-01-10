@@ -22,6 +22,7 @@ class Network{
                 case 200..<300:
                     if let URLData = data {
                     do {
+                        print(URL)
                     let ResponseResult = try JSONDecoder().decode(T.self, from: URLData)
                         completion(.success(ResponseResult))
                     }catch{

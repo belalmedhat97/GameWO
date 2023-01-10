@@ -99,6 +99,7 @@ private func getComingYear() -> String{
          let formatter = DateFormatter()
          formatter.dateFormat = "yyyy-MM-dd"
          formatter.calendar = .current
+         formatter.locale = Locale(identifier: "en_US_POSIX")
          formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
          let stringCurrentYear = formatter.string(from: date)
          let calendar = Calendar.current
@@ -112,6 +113,7 @@ private func getPreviousYear() -> String {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.calendar = .current
         formatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
         let calendar = Calendar.current
