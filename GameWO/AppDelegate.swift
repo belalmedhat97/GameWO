@@ -19,6 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         DropDown.startListeningToKeyboard()
         IQKeyboardManager.shared.enable = true
+        let appStatus = UserDefaults.standard.bool(forKey: LaunchScreenCase.status)
+        if appStatus != false {
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "HomeRootNC") as UIViewController
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+            return true
+        }
         return true
     }
     
